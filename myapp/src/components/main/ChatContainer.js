@@ -58,23 +58,20 @@ class ChatContainer extends Component {
 		if(this.props.user.userData.isAdmin){
 			socket.on('verifyroom',(roomlist)=>{
 			   if(roomlist.includes(this.state.roomname)){
-				
-	           	socket.emit('subscribe',this.state.roomname)
-		   
+				setTimeout(()=>{
+					this.props.history.push(`/livechat?answer='ROOM ALREADY PRESENT'`);
+				},500)
 			   }else{
-				   setTimeout(()=>{
-					   this.props.history.push(`/livechat?answer='ROOM ALREADY PRESENT'`);
-				   },3000)
+				 
+				socket.emit('subscribe',this.state.roomname)
+		   
 			   }
 			})		
 		   
 	   }else{
 			  
 		socket.emit('subscribe',this.state.roomname)
-		
-		setInterval(()=>{
-			console.log(this.state.chats)		
-            },500)   
+		   
 	   }
 					  }
 	
