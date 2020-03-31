@@ -71,11 +71,11 @@ class ChatContainer extends Component {
 	   }else{
 			  
 		socket.emit('subscribe',this.state.roomname)
-		   
-	   }
-     	setInterval(()=>{
+		
+		setInterval(()=>{
 			console.log(this.state.chats)		
-            },5000)
+            },500)   
+	   }
 					  }
 	
 	
