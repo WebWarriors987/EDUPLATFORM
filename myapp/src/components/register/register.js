@@ -154,12 +154,11 @@ onrchange=(e)=>{
 
     newformdata['role'].value=e.target.value
     this.setState({
-        formdata:newformdata,
-        value:e.target.value
+        formdata:newformdata,    
     })
-    
+
     this.setState({
-      value:1
+      value:e.target.value
     })
     console.log(this.state)
 }
