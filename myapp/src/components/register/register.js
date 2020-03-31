@@ -10,7 +10,6 @@ import Pic from '../utils/pic';
 class Register extends Component {
     state={
         loading:false,
-        value:0,
         formSuccess:false,
         formError:false,
         formdata:{
@@ -107,7 +106,7 @@ class Register extends Component {
         },
         
     },
-    
+    value:0
 }
 
 updateform=(element)=>{
@@ -156,13 +155,12 @@ onrchange=(e)=>{
     newformdata['role'].value=e.target.value
     this.setState({
         formdata:newformdata, 
-        value:e.target.value  
+  
     })
-    console.log(this.state.value)
 
-    // this.setState({
-    //   value:e.target.value
-    // })
+    this.setState({
+      value:e.target.value
+    })
     console.log(this.state)
 }
     render() {
@@ -239,7 +237,7 @@ onrchange=(e)=>{
                 <input
                 type="radio"
                 value="1"
-                checked={this.state.value === 1}
+                checked={this.state.value == 1}
                 onChange={(e)=>this.onrchange(e)}/>
                 </div>
                 <div className="col-lg-6 col-sm-6 col-md-6 col-xs-6">
@@ -253,7 +251,7 @@ onrchange=(e)=>{
                 <input
                 type="radio"
                 value="0"
-                checked={this.state.value === 0}
+                checked={this.state.value == 0}
                 onChange={(e)=>this.onrchange(e)}/>
                 </div>
                 <div className="col-lg-6 col-sm-6 col-md-6 col-xs-6">
