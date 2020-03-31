@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/519ca9a6-9fba-4273-af0c-f822e6008f57/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/EDUSTREAM",
+    "appService.deploySubpath": ""
+}
