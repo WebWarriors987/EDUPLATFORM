@@ -124,11 +124,11 @@ class Live extends Component {
         .then(success)
         .catch(failure)
   
-        this.props.user.userData.isAdmin?
-        setInterval(()=>{
-           this.createOffer() 
-            },2000):
-            console.log('hurray')
+        // this.props.user.userData.isAdmin?
+        // setInterval(()=>{
+        //    this.createOffer() 
+        //     },2000):
+        //     console.log('hurray')
     
     }
 
@@ -172,8 +172,8 @@ console.log( this.props.user.userData.isAdmin)
   <br />
         {
         this.props.user.userData.isAdmin?
-        // <button onClick={this.createOffer}>Offer</button>:
-        null:
+        <button onClick={this.createOffer}>Offer</button>:
+      
         <button className="btn btn-success"
         onClick={this.createAnswer}>Join Chat</button>
         }
