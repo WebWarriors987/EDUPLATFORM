@@ -10,6 +10,7 @@ import Pic from '../utils/pic';
 class Register extends Component {
     state={
         loading:false,
+        value:0,
         formSuccess:false,
         formError:false,
         formdata:{
@@ -106,7 +107,7 @@ class Register extends Component {
         },
         
     },
-    value:0
+    
 }
 
 updateform=(element)=>{
@@ -149,17 +150,19 @@ if(isformvalid){
 }
 
 onrchange=(e)=>{
-    console.log(this.state.formdata.role.value)
+    console.log(e.target.value)
     const newformdata=this.state.formdata
 
     newformdata['role'].value=e.target.value
     this.setState({
-        formdata:newformdata,    
+        formdata:newformdata, 
+        value:e.target.value  
     })
+    console.log(this.state.value)
 
-    this.setState({
-      value:e.target.value
-    })
+    // this.setState({
+    //   value:e.target.value
+    // })
     console.log(this.state)
 }
     render() {
@@ -272,61 +275,6 @@ onrchange=(e)=>{
                     
                 </div>
             
-                {/* <div><Pic image={hexa} text="EduStream"/></div> */}
-
-
-
-                {/* <div className="block row">
-               <FormFields
-                  formdata={this.state.formdata.name}
-                  id={'name'}
-                  change={(event)=>{this.updateform(event)}}
-                />
-                </div><br></br>
-               <div className="block row">
-               <FormFields
-                  formdata={this.state.formdata.lastname}
-                  id={'lastname'}
-                  change={(event)=>{this.updateform(event)}}
-                />
-                </div><br></br>
-               <div className="block row">
-               <FormFields
-                  formdata={this.state.formdata.email}
-                  id={'email'}
-                  change={(event)=>{this.updateform(event)}}
-                />
-                </div><br></br>
-                
-                <div className="block row">
-                  <FormFields
-                  formdata={this.state.formdata.password}
-                  id={'password'}
-                  change={(event)=>{this.updateform(event)}}
-                />
-                </div><br></br>
-
-                <div className="block row">
-                <FormFields
-                  formdata={this.state.formdata.confirmpassword}
-                  id={'confirmpassword'}
-                  change={(event)=>{this.updateform(event)}}
-                />
-                </div>
-
-                <br></br>
-                */}
-                 
-{/* 
-                <br></br>
-                <br></br>
-                        <center>  
-              <fieldset>
-                 <button id="contact-submit" style={{padding:"10px"}} onClick={(event)=> this.submitform(event)}>
-                     Create an account
-                </button>
-                </fieldset>
-                </center> */}
                 </form>
                 </div> 
 
