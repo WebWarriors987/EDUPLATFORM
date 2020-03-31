@@ -44,7 +44,7 @@ cloudinary.config({
 })
 
 
-const defaultemail={from:'webwarriors123@gmail.com'}
+const defaultemail={from:'webwarriors12@gmail.com'}
 
 const sendmail=(emaildata)=>{
     const compemail=Object.assign(defaultemail,emaildata)
@@ -52,8 +52,8 @@ const sendmail=(emaildata)=>{
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'webwarriors123@gmail.com',
-      pass: '!@#SauSam'
+      user: 'webwarriors12@gmail.com',
+      pass: '!@#SaySau'
     }
   });
   
