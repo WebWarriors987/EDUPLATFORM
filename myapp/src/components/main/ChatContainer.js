@@ -9,7 +9,7 @@ import {connect} from 'react-redux'
 import {endsession} from '../actions/recordactions'
 import { Container, Row, Col, Jumbotron } from 'react-bootstrap';
 
-const socketUrl = "http://localhost:3002"
+const socketUrl = "ws://.eduplatformwebwarriors.com/socket.io/?EIO=4&transport=websocket"
 class ChatContainer extends Component {
 	constructor(props){  
 		super(props)
