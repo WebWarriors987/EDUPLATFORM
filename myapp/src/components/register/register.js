@@ -230,7 +230,7 @@ onrchange=(e)=>{
                 </div>
 
                 <div className="row">
-                   <label style={{fontFamily:'algerian'}}> ARE YOU AN ADMIN ? </label> 
+                   <label style={{fontFamily:'algerian'}}> ARE YOU A TEACHER ? </label> 
            <div className="row">
            <div className="col-lg-6 col-sm-6 col-md-6 col-xs-6">
                 <input
