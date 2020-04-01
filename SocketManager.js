@@ -20,6 +20,12 @@ module.exports = function(socket){
 	  console.log('disconnected')
 	  connectedPeers.delete(socket.id)
 	})
+
+	socket.on("videostream",({stream,roomname})=>{
+		console.log("Hi",stream,roomname);
+		
+		socket.broadcast.to(roomname).emit("broadcast",stream)
+	})
   
 	socket.on('offerOrAnswer', (data) => {
 	  for (const [socketID, socket] of connectedPeers.entries()) {

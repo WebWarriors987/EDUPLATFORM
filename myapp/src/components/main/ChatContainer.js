@@ -127,7 +127,9 @@ class ChatContainer extends Component {
 				<Row>
 					<Col xs={12}>
 					<Row xs={1}>
-						<Live socket={this.state.socket}/>
+						<Live socket={this.state.socket}
+						      roomname={this.state.roomname}
+							  />
 					</Row>
 					<Row xs={1}>
 					

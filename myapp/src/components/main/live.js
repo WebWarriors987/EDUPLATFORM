@@ -14,108 +14,122 @@ class Live extends Component {
     this.candidates = []
   }
 
-  
+  componentWillMount(){
+    this.setState({socket:this.props.socket})
+  }
   componentDidMount = () => {
+      const socket=this.state.socket
 
 
-    this.socket.on('connection-success', success => {
-      console.log(success)
-    })
+      socket.on("broadcast",(stream)=>{
+        this.remoteVideoref.current.srcObject = stream
 
-    this.socket.on('offerOrAnswer', (sdp) => {
-    //   this.textref.value = JSON.stringify(sdp)
-      this.pc.setRemoteDescription(new RTCSessionDescription(sdp))
-    })
+      })
 
-    this.socket.on('candidate', (candidate) => {
-      this.pc.addIceCandidate(new RTCIceCandidate(candidate))
-    })
 
-    const pc_config = {
-      "iceServers": [
-        {
-          urls : 'stun:stun.l.google.com:19302'
-        },
-        {
-          url: 'turn:192.158.29.39:3478?transport=tcp',
-          credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-          username: '28224511:1379330808'
-        }
+
+  //   this.socket.on('connection-success', success => {
+  //     console.log(success)
+  //   })
+
+  //   this.socket.on('offerOrAnswer', (sdp) => {
+  //   //   this.textref.value = JSON.stringify(sdp)
+  //     this.pc.setRemoteDescription(new RTCSessionDescription(sdp))
+  //   })
+
+  //   this.socket.on('candidate', (candidate) => {
+  //     this.pc.addIceCandidate(new RTCIceCandidate(candidate))
+  //   })
+
+  //   const pc_config = {
+  //     "iceServers": [
+  //       {
+  //         urls : 'stun:stun.l.google.com:19302'
+  //       },
+  //       {
+  //         url: 'turn:192.158.29.39:3478?transport=tcp',
+  //         credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+  //         username: '28224511:1379330808'
+  //       }
         
-      ]
-    }
+  //     ]
+  //   }
 
-    this.pc = new RTCPeerConnection(pc_config)
+  //   this.pc = new RTCPeerConnection(pc_config)
 
-    this.pc.onicecandidate = (e) => {
-      if (e.candidate) {
-        this.sendToPeer('candidate', e.candidate)
-      }
-    }
+  //   this.pc.onicecandidate = (e) => {
+  //     if (e.candidate) {
+  //       this.sendToPeer('candidate', e.candidate)
+  //     }
+  //   }
     
 
-    this.pc.oniceconnectionstatechange = (e) => {
-      console.log(e)
-    }
+  //   this.pc.oniceconnectionstatechange = (e) => {
+  //     console.log(e)
+  //   }
 
-    this.pc.onaddstream = (e) => {
-      this.remoteVideoref.current.srcObject = e.stream
-    }
+  //   this.pc.onaddstream = (e) => {
+  //     this.remoteVideoref.current.srcObject = e.stream
+  //   }
 
-  }
+  // }
 
-  sendToPeer = (messageType, payload) => {
-    this.socket.emit(messageType, {
-      socketID: this.socket.id,
-      payload
-    })
-  }
+  // sendToPeer = (messageType, payload) => {
+  //   this.socket.emit(messageType, {
+  //     socketID: this.socket.id,
+  //     payload
+  //   })
+  // }
 
-  createOffer = () => {
+  // createOffer = () => {
 
-    console.log('Offer')
-    this.pc.createOffer({ offerToReceiveVideo: 1 })
-      .then(sdp => {
-        this.pc.setLocalDescription(sdp)
+  //   console.log('Offer')
+  //   this.pc.createOffer({ offerToReceiveVideo: 1 })
+  //     .then(sdp => {
+  //       this.pc.setLocalDescription(sdp)
 
-        this.sendToPeer('offerOrAnswer', sdp)
+  //       this.sendToPeer('offerOrAnswer', sdp)
         
  
-    })
+  //   })
 
   }
 
-  createAnswer = () => {
-    console.log('Answer')
-    this.pc.createAnswer({ offerToReceiveVideo: 1 })
-      .then(sdp => {
-        this.pc.setLocalDescription(sdp)
+  // createAnswer = () => {
+  //   console.log('Answer')
+  //   this.pc.createAnswer({ offerToReceiveVideo: 1 })
+  //     .then(sdp => {
+  //       this.pc.setLocalDescription(sdp)
 
-        this.sendToPeer('offerOrAnswer', sdp)
-    })
-  }
+  //       this.sendToPeer('offerOrAnswer', sdp)
+  //   })
+  // }
 
-  setRemoteDescription = () => {
-    const desc = JSON.parse(this.textref.value)
+  // setRemoteDescription = () => {
+  //   const desc = JSON.parse(this.textref.value)
 
-    this.pc.setRemoteDescription(new RTCSessionDescription(desc))
-  }
+  //   this.pc.setRemoteDescription(new RTCSessionDescription(desc))
+  // }
 
-  addCandidate = () => {
+  // addCandidate = () => {
 
-    this.candidates.forEach(candidate => {
-      console.log(JSON.stringify(candidate))
-      this.pc.addIceCandidate(new RTCIceCandidate(candidate))
-    });
-  }
+  //   this.candidates.forEach(candidate => {
+  //     console.log(JSON.stringify(candidate))
+  //     this.pc.addIceCandidate(new RTCIceCandidate(candidate))
+  //   });
+  // }
   startvideo=(e)=>{
       e.preventDefault()
+
       
     const success = (stream) => {
+        const socket=this.state.socket
+        const roomname=this.props.roomname
+        this.socket.emit("videostream",{stream,roomname})
         window.localStream = stream
         console.log('cxcx')
         this.localVideoref.current.srcObject = stream
-        this.pc.addStream(stream)
+        // this.pc.addStream(stream)
       }
    const failure = (e) => {
         console.log('getUserMedia Error: ', e)
@@ -149,8 +163,7 @@ console.log( this.props.user.userData.isAdmin)
       this.props.user.userData.isAdmin?
         <video
           style={{
-            width: 1000,
-            height: 400,
+            width:"100%",
             margin: 5,
             background:"black",
             border:"4px solid black"
@@ -161,8 +174,7 @@ console.log( this.props.user.userData.isAdmin)
         </video>:
         <video
           style={{
-            width: 1000,
-            height: 400,
+            width:"100%",
             margin: 5,
             background:"black",
             border:"4px solid black"
