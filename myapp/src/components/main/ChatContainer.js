@@ -9,7 +9,7 @@ import {connect} from 'react-redux'
 import {endsession} from '../actions/recordactions'
 import { Container, Row, Col, Jumbotron } from 'react-bootstrap';
 
-const socketUrl = "https://eduplatformwebwarriors.herokuapp.com"
+const socketUrl = "http://localhost:3002"
 class ChatContainer extends Component {
 	constructor(props){  
 		super(props)
@@ -54,13 +54,18 @@ class ChatContainer extends Component {
 	componentDidMount() {
 		const socket=this.state.socket
 		console.log(this.state.roomname)
+		socket.on("verifyroom",(roomlist)=>{
+			console.log(roomlist)
+		})
 
 		if(this.props.user.userData.isAdmin){
+			
 			socket.on('verifyroom',(roomlist)=>{
+				console.log(roomlist)
 			   if(roomlist.includes(this.state.roomname)){
-				setTimeout(()=>{
+				
 					this.props.history.push(`/livechat?answer='ROOM ALREADY PRESENT'`);
-				},500)
+				
 			   }else{
 				 
 				socket.emit('subscribe',this.state.roomname)
@@ -69,8 +74,19 @@ class ChatContainer extends Component {
 			})		
 		   
 	   }else{
+		socket.on('verifyroom',(roomlist)=>{
+			console.log(roomlist)
+			if(!roomlist.includes(this.state.roomname)){
+			 setTimeout(()=>{
+				 this.props.history.push(`/livechat?answer='ROOM NOT PRESENT'`);
+			 },500)
+			}else{
 			  
-		socket.emit('subscribe',this.state.roomname)
+			 socket.emit('subscribe',this.state.roomname)
+		
+			}
+		 })
+		//  socket.emit('subscribe',this.state.roomname)
 		   
 	   }
 					  }

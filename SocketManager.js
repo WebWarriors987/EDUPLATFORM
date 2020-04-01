@@ -5,8 +5,8 @@ let connectedPeers = new Map()
 
 module.exports = function(socket){
 
-	socket.emit('verifyroom',availableRooms)
-	roomList()
+	socket.emit('verifyroom',findRooms())
+	// roomList()
 
       socket.on('error',function(err){
        console.log(err)
@@ -78,7 +78,8 @@ module.exports = function(socket){
 
 function findRooms() {
 	var rooms = io.sockets.adapter.rooms;
-     availableRooms=[]
+	 availableRooms=[]
+	 console.log(rooms)
     if (rooms) {
         for (var room in rooms) {
             if (!rooms[room].hasOwnProperty(room)) {
