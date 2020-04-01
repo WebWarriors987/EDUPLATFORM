@@ -34,7 +34,7 @@ class ChatContainer extends Component {
 		   	}
 		
 			initSocket = ()=>{
-				const socket = io('http://localhost:3002')
+				const socket = io('https://eduplatformwebwarriors.herokuapp.com/')
 		
 				socket.on('connect', ()=>{
 					console.log("Connected");
