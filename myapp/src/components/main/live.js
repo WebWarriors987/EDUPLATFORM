@@ -20,11 +20,13 @@ class Live extends Component {
 
   }
   componentDidMount = () => {
-      const socket=this.state.socket
+    const socket=this.state.socket
+      
+    if(this.props.user.userData.isAdmin){
       this.context = this.canvasref.current.getContext('2d');
       this.context.width = this.canvasref.current.width;
       this.context.height = this.canvasref.current.height;
-
+    }
 
 
 
@@ -142,7 +144,7 @@ class Live extends Component {
         this.localVideoref.current.srcObject = stream
          let u=this.localVideoref
          let c=this.context
-        setInterval(function(){
+        setInterval(()=>{
             this.viewVideo(u.current,c);
         },5);
         // this.pc.addStream(stream)
