@@ -134,6 +134,7 @@ class Live extends Component {
     this.context.drawImage(video,0,0,context.width,context.height);
     const roomname=this.props.roomname
     const y=this.canvasref.current.toDataURL('image/webp')
+    console.log(y)
     this.state.socket.emit('videostream',{y,roomname});
 }
   }
