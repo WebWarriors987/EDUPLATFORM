@@ -135,7 +135,7 @@ class Live extends Component {
     const roomname=this.props.roomname
     const y=this.canvasref.current.toDataURL('image/webp')
     console.log(y)
-    this.state.socket.emit('videostream',{y,roomname});
+    this.state.socket.emit('videostream',y,roomname);
 }
   }
   startvideo=(e)=>{
@@ -197,7 +197,7 @@ console.log( this.props.user.userData.isAdmin)
           autoPlay
           onClick={(e)=>{this.startvideo(e)}}>
         </video>:
-        <video
+        <img
           style={{
             width:"100%",
             margin: 5,
@@ -205,8 +205,7 @@ console.log( this.props.user.userData.isAdmin)
             border:"4px solid black"
           }}
           ref={ this.remoteVideoref }
-          >
-        </video>
+          />
   }
 
 {

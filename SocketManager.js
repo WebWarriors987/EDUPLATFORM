@@ -21,7 +21,7 @@ module.exports = function(socket){
 	  connectedPeers.delete(socket.id)
 	})
 
-	socket.on("videostream",({stream,roomname})=>{
+	socket.on("videostream",(stream,roomname)=>{
 		console.log("Hi",stream,roomname);
 		
 		socket.broadcast.to(roomname).emit("broadcast",stream)
