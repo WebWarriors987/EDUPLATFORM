@@ -182,7 +182,7 @@ console.log( this.props.user.userData.isAdmin)
     return (
 
       <Container>
-        <p>
+        
         {
       this.props.user.userData.isAdmin?
         <video
@@ -214,8 +214,6 @@ console.log( this.props.user.userData.isAdmin)
       :null
   }
 
-        </p>
-        
 <Row xs={1}>
   <Col xs={12}>
   <br />
