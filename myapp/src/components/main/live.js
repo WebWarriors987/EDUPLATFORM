@@ -46,6 +46,7 @@ class Live extends Component {
         this.sendToPeer('candidate', e.candidate)
       }
     }
+    
 
     this.pc.oniceconnectionstatechange = (e) => {
       console.log(e)
