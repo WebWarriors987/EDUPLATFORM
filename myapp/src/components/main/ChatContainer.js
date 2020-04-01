@@ -74,19 +74,19 @@ class ChatContainer extends Component {
 			})		
 		   
 	   }else{
-		socket.on('verifyroom',(roomlist)=>{
-			console.log(roomlist)
-			if(!roomlist.includes(this.state.roomname)){
-			 setTimeout(()=>{
-				 this.props.history.push(`/livechat?answer='ROOM NOT PRESENT'`);
-			 },500)
-			}else{
+		// socket.on('verifyroom',(roomlist)=>{
+		// 	console.log(roomlist)
+		// 	if(!roomlist.includes(this.state.roomname)){
+		// 	 setTimeout(()=>{
+		// 		 this.props.history.push(`/livechat?answer='ROOM NOT PRESENT'`);
+		// 	 },500)
+		// 	}else{
 			  
-			 socket.emit('subscribe',this.state.roomname)
+		// 	 socket.emit('subscribe',this.state.roomname)
 		
-			}
-		 })
-		//  socket.emit('subscribe',this.state.roomname)
+		// 	}
+		//  })
+		 socket.emit('subscribe',this.state.roomname)
 		   
 	   }
 					  }
