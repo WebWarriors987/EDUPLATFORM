@@ -33,7 +33,6 @@ class Live extends Component {
       socket.on("broadcast",(stream)=>{
         console.log(stream)
         this.remoteVideoref.current.srcObject = stream
-
       })
 
 
@@ -200,6 +199,7 @@ console.log( this.props.user.userData.isAdmin)
         <img
           style={{
             width:"100%",
+            height:"300px",
             margin: 5,
             background:"black",
             border:"4px solid black"
