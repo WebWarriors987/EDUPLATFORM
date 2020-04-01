@@ -7,7 +7,10 @@ module.exports = function(socket){
 
 	socket.emit('verifyroom',availableRooms)
 	roomList()
-
+   socket.on('peeron',(id)=>{
+	   console.log('hjhkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
+      socket.emit('peerlist',id)
+    })
       socket.on('error',function(err){
        console.log(err)
 	  })

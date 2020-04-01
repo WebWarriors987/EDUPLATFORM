@@ -34,7 +34,7 @@ class ChatContainer extends Component {
 		   	}
 		
 			initSocket = ()=>{
-				const socket = io(socketUrl)
+				const socket = io('http://localhost:3002')
 		
 				socket.on('connect', ()=>{
 					console.log("Connected");
