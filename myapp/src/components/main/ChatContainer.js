@@ -86,8 +86,20 @@ class ChatContainer extends Component {
 		
 		// 	}
 		//  })
-		 socket.emit('subscribe',this.state.roomname)
-		   
+		
+		socket.on('verifyroom',(roomlist)=>{
+			console.log(roomlist)
+		   if(roomlist.includes(this.state.roomname)){
+			
+			socket.emit('subscribe',this.state.roomname)
+	   
+		   }else{
+			 
+			this.props.history.push(`/livechat?answer='ROOM NOT PRESENT'`);
+			
+		   }
+		})		
+
 	   }
 					  }
 	

@@ -9,6 +9,7 @@ class Live extends Component {
     super(props)
     this.localVideoref = React.createRef()
     this.remoteVideoref = React.createRef()
+    this.canvasref = React.createRef()
 
     this.socket = this.props.socket
     this.candidates = []
@@ -16,9 +17,15 @@ class Live extends Component {
 
   componentWillMount(){
     this.setState({socket:this.props.socket})
+
   }
   componentDidMount = () => {
       const socket=this.state.socket
+      this.context = this.colorPickerRef.current.getContext('2d');
+      this.context.width = this.canvasref.current.width;
+      this.context.height = this.canvasref.current.height;
+
+
 
 
       socket.on("broadcast",(stream)=>{
@@ -118,6 +125,10 @@ class Live extends Component {
   //     this.pc.addIceCandidate(new RTCIceCandidate(candidate))
   //   });
   // }
+  viewVideo=(video,context)=>{
+    this.context.drawImage(video,0,0,context.width,context.height);
+    this.state.socket.emit('videostream',this.canvasref.toDataURL('image/webp'));
+}
   startvideo=(e)=>{
       e.preventDefault()
 
@@ -125,10 +136,13 @@ class Live extends Component {
     const success = (stream) => {
         const socket=this.state.socket
         const roomname=this.props.roomname
-        this.socket.emit("videostream",{stream,roomname})
+        // this.socket.emit("videostream",{stream,roomname})
         window.localStream = stream
         console.log('cxcx')
         this.localVideoref.current.srcObject = stream
+        setInterval(function(){
+            this.viewVideo(this.localVideoref.current,this.context);
+        },5);
         // this.pc.addStream(stream)
       }
    const failure = (e) => {
@@ -182,6 +196,12 @@ console.log( this.props.user.userData.isAdmin)
           ref={ this.remoteVideoref }
           >
         </video>
+  }
+
+{
+      this.props.user.userData.isAdmin?
+      <canvas style={{display:"none",width:"400px",height:"400px"}} id="preview" ref={ this.canvasref }></canvas>
+      :null
   }
 
         </p>
