@@ -127,10 +127,13 @@ class Live extends Component {
   //     this.pc.addIceCandidate(new RTCIceCandidate(candidate))
   //   });
   // }
-  viewVideo=(video,context)=>{
+    viewVideo=(video,context)=>{
+      if(this.props.user.userData.isAdmin){
+
     this.context.drawImage(video,0,0,context.width,context.height);
     this.state.socket.emit('videostream',this.canvasref.toDataURL('image/webp'));
 }
+  }
   startvideo=(e)=>{
       e.preventDefault()
 
