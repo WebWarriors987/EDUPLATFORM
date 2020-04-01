@@ -219,25 +219,6 @@ console.log( this.props.user.userData.isAdmin)
       :null
   }
 
-<Row xs={1}>
-  <Col xs={12}>
-  <br />
-        {
-        this.props.user.userData.isAdmin?
-        <button onClick={this.createOffer}>Offer</button>:
-      
-        <button className="btn btn-success"
-        onClick={this.createAnswer}>Join Chat</button>
-        }
-        <br />
-        {/* <textarea style={{ width: 450, height:40 }} ref={ref => { this.textref = ref }} /> */}
-        
-        
-
-  </Col>
-</Row>
-      
-
       
       
 
