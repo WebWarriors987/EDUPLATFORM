@@ -140,8 +140,9 @@ class Live extends Component {
         window.localStream = stream
         console.log('cxcx')
         this.localVideoref.current.srcObject = stream
+         let u=this.localVideoref
         setInterval(function(){
-            this.viewVideo(this.localVideoref.current,this.context);
+            this.viewVideo(u.current,this.context);
         },5);
         // this.pc.addStream(stream)
       }
