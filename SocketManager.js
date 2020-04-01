@@ -5,12 +5,9 @@ let connectedPeers = new Map()
 
 module.exports = function(socket){
 
-	socket.emit('verifyroom',availableRooms)
-	roomList()
-   socket.on('peeron',(id)=>{
-	   console.log('hjhkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
-      socket.emit('peerlist',id)
-    })
+	socket.emit('verifyroom',findRooms())
+	// roomList()
+
       socket.on('error',function(err){
        console.log(err)
 	  })
@@ -22,6 +19,12 @@ module.exports = function(socket){
 	socket.on('disconnect', () => {
 	  console.log('disconnected')
 	  connectedPeers.delete(socket.id)
+	})
+
+	socket.on("videostream",({stream,roomname})=>{
+		console.log("Hi",stream,roomname);
+		
+		socket.broadcast.to(roomname).emit("broadcast",stream)
 	})
   
 	socket.on('offerOrAnswer', (data) => {
@@ -81,7 +84,8 @@ module.exports = function(socket){
 
 function findRooms() {
 	var rooms = io.sockets.adapter.rooms;
-     availableRooms=[]
+	 availableRooms=[]
+	 console.log(rooms)
     if (rooms) {
         for (var room in rooms) {
             if (!rooms[room].hasOwnProperty(room)) {

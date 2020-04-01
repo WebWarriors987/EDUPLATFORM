@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {Link,withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {writeuser} from './actions/recordactions'
+import queryString from 'query-string'
+
 import { Row, Container, Jumbotron, Card, Button, Form } from 'react-bootstrap';
 
 class LoginForm extends Component {
@@ -9,9 +11,15 @@ class LoginForm extends Component {
 	state = {
 	  	roomname:"",
 		  error:"",
-		  roomList:[]
+		  roomList:[],
+		  err_mess:"",
+		
 	  }
-
+	componentDidMount(){
+		const mess=queryString.parse(window.location.search).answer
+		console.log(mess);
+		this.setState({err_mess:mess})
+	}
 
 	handleSubmit = (e)=>{
 		e.preventDefault()
@@ -75,10 +83,13 @@ class LoginForm extends Component {
 								</Button>
 								</Form>
 							
+
+							
 							</Card.Body>
 						</Card>
-							
+		
 							</p>
+							<h2 style={{color:"red"}} >{this.state.err_mess}</h2>
 					</Jumbotron>
 
 					</Row>
