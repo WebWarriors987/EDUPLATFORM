@@ -7,6 +7,9 @@ import { Jumbotron, Row, Col, Container } from 'react-bootstrap';
 class Live extends Component {
   constructor(props) {
     super(props)
+    this.state={
+      images:''
+    }
     this.localVideoref = React.createRef()
     this.remoteVideoref = React.createRef()
     this.canvasref = React.createRef()
@@ -32,7 +35,9 @@ class Live extends Component {
 
       socket.on("broadcast",(stream)=>{
         console.log(stream)
-        this.remoteVideoref.current.srcObject = stream
+        this.setState({
+          images:stream
+        })
       })
 
 
@@ -204,7 +209,7 @@ console.log( this.props.user.userData.isAdmin)
             background:"black",
             border:"4px solid black"
           }}
-          ref={ this.remoteVideoref }
+          src={this.state.images}
           />
   }
 
