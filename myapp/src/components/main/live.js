@@ -31,6 +31,7 @@ class Live extends Component {
 
 
       socket.on("broadcast",(stream)=>{
+        console.log(stream)
         this.remoteVideoref.current.srcObject = stream
 
       })
