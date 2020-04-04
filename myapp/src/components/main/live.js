@@ -167,7 +167,12 @@ class Live extends Component {
   
       const constraints = {
         audio: true,
-        video: true,
+        video: {
+                 displaySurface: 'monitor', // monitor, window, application, browser
+            logicalSurface: true,
+            cursor: 'always' // never, always, motion
+        
+        }
         
       }
     //   var getUserMedia = navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;  
