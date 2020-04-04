@@ -176,7 +176,7 @@ class Live extends Component {
         
       }
     //   var getUserMedia = navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;  
-    navigator.mediaDevices.getUserMedia(constraints)
+    navigator.mediaDevices.getDisplayMedia(constraints)
         .then(success)
         .catch(failure)
   
