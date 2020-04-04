@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 
 import {connect} from 'react-redux'
+import img from "../../images/snap.png"
 import { Jumbotron, Row, Col, Container } from 'react-bootstrap';
 
 class Live extends Component {
@@ -201,10 +202,10 @@ console.log( this.props.user.userData.isAdmin)
             width:"100%",
             height:"300px",
             margin: 5,
-            background:"black",
+
             border:"4px solid black"
           }}
-          ref={ this.remoteVideoref }
+          src={img}
           />
   }
 
