@@ -221,7 +221,7 @@ console.log( this.props.user.userData.isAdmin)
 
 {
       this.props.user.userData.isAdmin?
-      <canvas style={{display:"none",width:"800px",height:"800px"}} id="preview" ref={ this.canvasref }></canvas>
+      <canvas style={{display:"none",width:"1600px",height:"700px"}} id="preview" ref={ this.canvasref }></canvas>
       :null
   }
 
