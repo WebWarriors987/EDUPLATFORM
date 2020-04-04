@@ -1,15 +1,17 @@
-  
+
 import React, { Component } from 'react';
 
 import {connect} from 'react-redux'
 import img from "../../images/snap.png"
 import { Jumbotron, Row, Col, Container } from 'react-bootstrap';
+import ButtonB from '../UI/Button';
 
 class Live extends Component {
   constructor(props) {
     super(props)
     this.state={
-      images:''
+      images:'',
+      screenshare:true
     }
     this.localVideoref = React.createRef()
     this.remoteVideoref = React.createRef()
@@ -41,7 +43,7 @@ class Live extends Component {
         })
       })
 
-
+     
 
   //   this.socket.on('connection-success', success => {
   //     console.log(success)
@@ -138,7 +140,7 @@ class Live extends Component {
 
     this.context.drawImage(video,0,0,context.width,context.height);
     const roomname=this.props.roomname
-    const y=this.canvasref.current.toDataURL('image/webp')
+    const y=this.canvasref.current.toDataURL('image/png')
     console.log(y)
     this.state.socket.emit('videostream',y,roomname);
 }
@@ -157,9 +159,10 @@ class Live extends Component {
          let u=this.localVideoref
          let c=this.context
         setInterval(()=>{
-            this.viewVideo(u.current,c);
+          
+          this.viewVideo(u.current,c)
         },5);
-        // this.pc.addStream(stream)
+        //this.pc.addStream(stream)
       }
    const failure = (e) => {
         console.log('getUserMedia Error: ', e)
@@ -167,18 +170,24 @@ class Live extends Component {
   
       const constraints = {
         audio: true,
-        video: {
+        video: this.state.screenshare?{
+          
                  displaySurface: 'monitor', // monitor, window, application, browser
             logicalSurface: true,
             cursor: 'always' // never, always, motion
         
-        }
+        }:true
         
       }
-    //   var getUserMedia = navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;  
-    navigator.mediaDevices.getDisplayMedia(constraints)
-        .then(success)
-        .catch(failure)
+      // var getUserMedia = navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;  
+      this.state.screenshare?
+      navigator.mediaDevices.getDisplayMedia(constraints)
+      .then(success)
+      .catch(failure)
+      :
+      navigator.mediaDevices.getUserMedia(constraints)
+      .then(success)
+      .catch(failure)
   
         // this.props.user.userData.isAdmin?
         // setInterval(()=>{
@@ -187,10 +196,22 @@ class Live extends Component {
         //     console.log('hurray')
     
     }
+    screenShareHandler=()=>{
+        
+      this.setState({screenshare:this.state.screenshare?false:true})
+      this.context = this.canvasref.current.getContext('2d');
+      this.context.width = this.canvasref.current.width;
+      this.context.height = this.canvasref.current.height;
+      
+    
+    
+  }
 
   render() {
 console.log( this.props.user.userData.isAdmin)
-    return (
+const share=this.state.screenshare?"Click video to start screen-sharing":"Click Video to start live-streaming";
+  
+return (
 
       <Container>
         
@@ -205,15 +226,16 @@ console.log( this.props.user.userData.isAdmin)
           }}
           ref={ this.localVideoref }
           autoPlay
-          onClick={(e)=>{this.startvideo(e)}}>
+          onClick={(e)=>{this.startvideo(e)}}
+          >
         </video>:
         <img
           style={{
             width:"100%",
-            height:"800px",
+            height:"600px",
             margin: 5,
 
-            border:"4px solid black"
+            border:"1px solid black"
           }}
           src={this.state.images}
           />
@@ -221,8 +243,19 @@ console.log( this.props.user.userData.isAdmin)
 
 {
       this.props.user.userData.isAdmin?
+        
       <canvas style={{display:"none",width:"1600px",height:"700px"}} id="preview" ref={ this.canvasref }></canvas>
+      
+      
       :null
+  }
+  {
+    this.props.user.userData.isAdmin?
+        
+    <ButtonB id="contact-submit" onClick={this.screenShareHandler} text={share}/>
+    
+   
+    :null
   }
 
       

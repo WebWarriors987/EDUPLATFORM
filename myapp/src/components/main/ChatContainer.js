@@ -18,7 +18,8 @@ class ChatContainer extends Component {
 		  activeChat:null,
 		  socket:{},
 		  roomname:'',
-		  user:''
+		  user:'',
+		
 			 }
 			 
 			}
@@ -148,7 +149,7 @@ class ChatContainer extends Component {
 					<div className="chat-room-container" style={{width:"100%",height:"100%",margin:"4px"}}>
 					 
 					 	
-						 <div className="chat-room" style={{border:"2px solid black"}}>
+						 <div className="chat-room" >
 				 
 				 {this.state.chats.length>0?
 				   <Messages
