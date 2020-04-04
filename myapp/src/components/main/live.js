@@ -210,7 +210,7 @@ console.log( this.props.user.userData.isAdmin)
         <img
           style={{
             width:"100%",
-            height:"300px",
+            height:"800px",
             margin: 5,
 
             border:"4px solid black"
