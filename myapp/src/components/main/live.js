@@ -139,56 +139,57 @@ class Live extends Component {
   // }
     viewVideo=(video,context)=>{
       if(this.props.user.userData.isAdmin){
-        const canvasImg=new Image();
-        canvasImg.onload=()=>{
+        
+    
           this.context.drawImage(video,0,0,context.width,context.height);
     const roomname=this.props.roomname
-    const y=this.canvasref.current.toDataURL('image/png')
+    const y=this.canvasref.current.toDataURL('image/webp')
     console.log(y)
     this.state.socket.emit('videostream',y,roomname);
 
-    }
+    
 
     
 }
   }
   ///lIVE STREAMING AUDIO JUGGAR
-  audioPlay=()=>{
-    var constraints = { audio: true };
-navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
-var mediaRecorder = new MediaRecorder(mediaStream);
-mediaRecorder.onstart = ()=> {
-    this.chunks = [];
-};
-mediaRecorder.ondataavailable =(e)=> {
-    this.chunks.push(e.data);
-};
-mediaRecorder.onstop = ()=> {
-    var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
-    this.socket.emit('radio', blob);
-};
+  // audioPlay=()=>{
+//     var constraints = { audio: true };
+// navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
+// var mediaRecorder = new MediaRecorder(mediaStream);
+// mediaRecorder.onstart = ()=> {
+//     this.chunks = [];
+// };
+// mediaRecorder.ondataavailable =(e)=> {
+//     this.chunks.push(e.data);
+// };
+// mediaRecorder.onstop = ()=> {
+//     var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
+//     this.state.socket.emit('radio', blob);
+// };
 
-// Start recording
-mediaRecorder.start();
+// // Start recording
+// mediaRecorder.start();
 
-// Stop recording after 5 seconds and broadcast it to server
-setInterval(()=> {
-    mediaRecorder.stop()
-    mediaRecorder.start()
-  }, 5);
-});
+// // Stop recording after 5 seconds and broadcast it to server
+// setInterval(()=> {
+//     mediaRecorder.stop()
+//     mediaRecorder.start()
+//   }, 5);
+// });
 
 // When the client receives a voice message it will play the sound
-this.socket.on('voice', function(arrayBuffer) {
-  var blob = new Blob([arrayBuffer], { 'type' : 'audio/ogg; codecs=opus' });
-  var audio = this.audioRef.current;
-  audio.src = window.URL.createObjectURL(blob);
-  audio.play();
-});
-  }
-  startvideo=(e)=>{
-      e.preventDefault()
-    this.isDisabled();
+// this.state.socket.on('voice', function(arrayBuffer) {
+//   var blob = new Blob([arrayBuffer], { 'type' : 'audio/ogg; codecs=opus' });
+//   var audio = this.audioRef.current;
+//   audio.src = window.URL.createObjectURL(blob);
+//   audio.play();
+// });
+//   }
+  startscreenshare=(e)=>{
+    e.preventDefault()
+    this.stopVideoPlay()
+    
       
     const success = (stream) => {
         const socket=this.state.socket
@@ -213,21 +214,64 @@ this.socket.on('voice', function(arrayBuffer) {
         audio: {
           echoCancellation: true
           },
-        video: this.state.screenshare?{
+        video:{
           
                  displaySurface: 'monitor', // monitor, window, application, browser
             logicalSurface: true,
             cursor: 'always' // never, always, motion
         
-        }:true
+        }
         
       }
       // var getUserMedia = navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;  
-      this.state.screenshare?
+      
       navigator.mediaDevices.getDisplayMedia(constraints)
       .then(success)
       .catch(failure)
-      :
+      
+        // this.props.user.userData.isAdmin?
+        // setInterval(()=>{
+        //    this.createOffer() 
+        //     },2000):
+        //     console.log('hurray')
+    
+    }
+
+  
+
+
+  startvideo=(e)=>{
+      e.preventDefault()
+    this.stopVideoPlay();
+      
+    const success = (stream) => {
+        const socket=this.state.socket
+        const roomname=this.props.roomname
+        // this.socket.emit("videostream",{stream,roomname})
+        window.localStream = stream
+        console.log('cxcx')
+        this.localVideoref.current.srcObject = stream
+         let u=this.localVideoref
+         let c=this.context
+        setInterval(()=>{
+          
+          this.viewVideo(u.current,c)
+        },5);
+        //this.pc.addStream(stream)
+      }
+   const failure = (e) => {
+        console.log('Error: ', e)
+      }
+  
+      const constraints = {
+        audio: {
+          echoCancellation: true
+          },
+        video:true
+        
+      }
+      // var getUserMedia = navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;  
+      
       navigator.mediaDevices.getUserMedia(constraints)
       .then(success)
       .catch(failure)
@@ -239,44 +283,51 @@ this.socket.on('voice', function(arrayBuffer) {
         //     console.log('hurray')
     
     }
-    screenShareHandler=()=>{
+
+  //   screenShareHandler=()=>{
         
-      this.setState({screenshare:this.state.screenshare?false:true})
+  //     this.setState({screenshare:this.state.screenshare?false:true})
 
       
     
     
-  }
+  // }
   stopVideoPlay=()=>{
+    if(this.localVideoref.current){
     const stream = this.localVideoref.current.srcObject;
     if(stream){
-    const tracks = stream.getTracks();
+      const tracks = stream.getTracks();
       tracks.forEach(function(track) {
         track.stop();
       });
     }
-    this.setState({disabled:true})
+    
+    
+   
     
 
     this.localVideoref.current.srcObject = null;
+  }
 
   }
-  isDisabled=()=>{
+  // isDisabled=()=>{
 
-    const stream = this.localVideoref.current.srcObject;
-    if(stream)
-    {
-      const tracks = stream.getTracks();
-      this.setState({disabled:false});
-    }
-  }
+  //   const stream = this.localVideoref.current.srcObject;
+  //   if(stream)
+  //   {
+  //     const tracks = stream.getTracks();
+  //     this.setState({disabled:false});
+  //   }
+  // }
+
+
   componentWillUnmount(){
     this.stopVideoPlay();
   }
 
-  render() {
+  render(){
 console.log( this.props.user.userData.isAdmin)
-const share=this.state.screenshare?"Click video to start screen-sharing":"Click Video to start live-streaming";
+// const share=this.state.screenshare?"Click video to start screen-sharing":"Click Video to start live-streaming";
   
 return (
 
@@ -293,8 +344,8 @@ return (
           }}
           ref={ this.localVideoref }
           autoPlay
-          onClick={(e)=>{this.startvideo(e)}}
-          ><audio ref={this.audioRef} autoPlay style={{display:"none"}}/> 
+          
+          ><audio ref={this.audioRef} style={{display:"none"}}/> 
         </video>:
         <img
           style={{
@@ -311,7 +362,7 @@ return (
 {
       this.props.user.userData.isAdmin?
         
-      <canvas width="1200" height="600" style={{display:"none",width:"1600px",height:"700px"}} id="preview" ref={ this.canvasref }></canvas>
+      <canvas width="700" height="450" style={{display:"none",width:"1600px",height:"700px"}} id="preview" ref={ this.canvasref }></canvas>
       
       
       :null
@@ -319,7 +370,8 @@ return (
   {
     this.props.user.userData.isAdmin?
     <div className="row xs-1" style={{justifyContent:"center"}}>
-    <ButtonB id="contact-submit" onClick={this.screenShareHandler} text={share}/>
+    <ButtonB id="contact-submit" onClick={(e)=>{this.startvideo(e)}} text={"Start Video"}/>
+    <ButtonB id="contact-submit" onClick={(e)=>{this.startscreenshare(e)}} text={"Start ScreenShare"}/>
     <ButtonB id="contact-submit-danger" onClick={this.stopVideoPlay} disabled={this.state.disabled} text="End Video"/>
     <ButtonB id="contact-submit-reset" onClick={this.audioPlay} disabled={this.state.disabled} text="Audio"/>
 
