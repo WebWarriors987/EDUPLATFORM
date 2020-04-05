@@ -863,10 +863,29 @@ fieldset {
   transition: all 0.5s ease;
 
 }
+#contact-submit-danger{
+  cursor: pointer;
+  width: 100%;
+  background-color: white;
+  box-shadow:0 0 5px rgb(252, 15, 15) ;  
+  color: rgb(252, 15, 15);
+  margin: 25px 0 25px;
+  padding: 10px;
+  font-size: 15px;
+  transition: all 0.5s ease;
+
+}
 #contact-submit-reset:hover{
   cursor: pointer;
   box-shadow:none ;  
   background-color: rgb(15, 115, 173);
+  color: white;
+
+}
+#contact-submit-danger:hover{
+  cursor: pointer;
+  box-shadow:none ;  
+  background-color: rgb(252, 15, 15);
   color: white;
 
 }
