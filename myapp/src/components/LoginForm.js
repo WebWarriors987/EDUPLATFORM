@@ -17,7 +17,7 @@ class LoginForm extends Component {
 	  }
 	componentDidMount(){
 		const mess=queryString.parse(window.location.search).answer
-		console.log(mess);
+		// console.log(mess);
 		this.setState({err_mess:mess})
 	}
 
@@ -29,7 +29,7 @@ class LoginForm extends Component {
            console.log(res)
 		}).catch(e=>console.log(e))
 	
-		console.log(this.state.roomname)
+		// console.log(this.state.roomname)
 		// socket.on('rooms',rooms=>{
 		// 	console.log("ds")
 	       		
@@ -42,7 +42,7 @@ class LoginForm extends Component {
         const userid=this.props.user.userData.id
 		setTimeout(()=>{
             this.props.history.push(`/chat?room=${this.state.roomname}&name=${userid}`)
-            console.log('dffdfd')
+            // console.log('dffdfd')
             },5000)
 
 	// }

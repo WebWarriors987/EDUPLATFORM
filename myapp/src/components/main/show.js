@@ -17,7 +17,7 @@ class Show extends Component {
 
 componentDidMount(){
     this.props.dispatch(getrecords(this.props.user.userData.id)).then(response=>{
-        console.log(response.payload)
+        //console.log(response.payload)
         this.setState({
           ...response.payload,
            pic:response.payload.images
@@ -28,7 +28,7 @@ componentDidMount(){
         this.setState({temp:val})
     }
     render() {
-        console.log(this.state.pic)
+       // console.log(this.state.pic)
 
         const sub=(
                 this.state.temp?

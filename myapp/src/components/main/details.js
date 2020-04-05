@@ -156,9 +156,9 @@ updateform=(element)=>{
 submitform=(event)=>{
     event.preventDefault();
     const isformvalid=validform(this.state.formdata,'register')
-    console.log(isformvalid)
+    // console.log(isformvalid)
     const data=generatedata(this.state.formdata,'register')
-    console.log(this.props.user.member)
+    // console.log(this.props.user.member)
     if(true){
         this.props.dispatch(adddetails(data)).then((response)=>{
              console.log('hurray')
@@ -169,13 +169,13 @@ submitform=(event)=>{
                 
             setTimeout(()=>{
                 this.props.history.push('/show')
-                console.log('dffdfd')
+                // console.log('dffdfd')
                 },5000)
             }
         )}
     }
 imageHandler=(images)=>{
-    console.log(images)
+    // console.log(images)
     const newFormData={
         ...this.state.formdata
     }
@@ -185,11 +185,11 @@ imageHandler=(images)=>{
           formData:newFormData
       })
 
-      console.log(this.state.formdata.images)
+    //   console.log(this.state.formdata.images)
 }
 
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <div className="container">
             <div className='add'>

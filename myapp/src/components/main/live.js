@@ -39,7 +39,7 @@ class Live extends Component {
 
 
       socket.on("broadcast",(stream)=>{
-        console.log(stream)
+        // console.log(stream)
         this.setState({
           images:stream
         })
@@ -199,7 +199,7 @@ this.state.socket.on('voice', function(arrayBuffer) {
         const roomname=this.props.roomname
         // this.socket.emit("videostream",{stream,roomname})
         window.localStream = stream
-        console.log('cxcx')
+        //console.log('cxcx')
         this.localVideoref.current.srcObject = stream
          let u=this.localVideoref
          let c=this.context
@@ -329,7 +329,7 @@ this.state.socket.on('voice', function(arrayBuffer) {
   }
 
   render(){
-console.log( this.props.user.userData.isAdmin)
+//console.log( this.props.user.userData.isAdmin)
 // const share=this.state.screenshare?"Click video to start screen-sharing":"Click Video to start live-streaming";
   
 return (
