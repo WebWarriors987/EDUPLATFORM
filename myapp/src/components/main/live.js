@@ -153,39 +153,42 @@ class Live extends Component {
 }
   }
   ///lIVE STREAMING AUDIO JUGGAR
-  // audioPlay=()=>{
-//     var constraints = { audio: true };
-// navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
-// var mediaRecorder = new MediaRecorder(mediaStream);
-// mediaRecorder.onstart = ()=> {
-//     this.chunks = [];
-// };
-// mediaRecorder.ondataavailable =(e)=> {
-//     this.chunks.push(e.data);
-// };
-// mediaRecorder.onstop = ()=> {
-//     var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
-//     this.state.socket.emit('radio', blob);
-// };
+  audioPlay=()=>{
+    var constraints = { audio: true };
+navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
+var mediaRecorder = new MediaRecorder(mediaStream);
+mediaRecorder.onstart = ()=> {
+    this.chunks = [];
+};
+mediaRecorder.ondataavailable =(e)=> {
+    this.chunks.push(e.data);
+};
+mediaRecorder.onstop = ()=> {
+    var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
+    this.state.socket.emit('radio', blob);
+};
 
-// // Start recording
-// mediaRecorder.start();
+// Start recording
+mediaRecorder.start();
 
 // // Stop recording after 5 seconds and broadcast it to server
-// setInterval(()=> {
-//     mediaRecorder.stop()
-//     mediaRecorder.start()
-//   }, 5);
-// });
+setInterval(()=> {
+    mediaRecorder.stop()
+    mediaRecorder.start()
+  }, 5);
+})
+.catch(e=>{
+  console.log('Error: ', e)
+});
 
-// When the client receives a voice message it will play the sound
-// this.state.socket.on('voice', function(arrayBuffer) {
-//   var blob = new Blob([arrayBuffer], { 'type' : 'audio/ogg; codecs=opus' });
-//   var audio = this.audioRef.current;
-//   audio.src = window.URL.createObjectURL(blob);
-//   audio.play();
-// });
-//   }
+
+this.state.socket.on('voice', function(arrayBuffer) {
+  var blob = new Blob([arrayBuffer], { 'type' : 'audio/ogg; codecs=opus' });
+  var audio = this.audioRef.current;
+  audio.src = window.URL.createObjectURL(blob);
+  audio.play();
+});
+  }
   startscreenshare=(e)=>{
     e.preventDefault()
     this.stopVideoPlay()
