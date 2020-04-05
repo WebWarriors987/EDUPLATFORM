@@ -15,6 +15,7 @@ class Live extends Component {
       disabled:false,
     }
     this.localVideoref = React.createRef()
+    this.audioRef=React.createRef()
     this.remoteVideoref = React.createRef()
     this.canvasref = React.createRef()
 
@@ -151,6 +152,40 @@ class Live extends Component {
     
 }
   }
+  ///lIVE STREAMING AUDIO JUGGAR
+  audioPlay=()=>{
+    var constraints = { audio: true };
+navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
+var mediaRecorder = new MediaRecorder(mediaStream);
+mediaRecorder.onstart = ()=> {
+    this.chunks = [];
+};
+mediaRecorder.ondataavailable =(e)=> {
+    this.chunks.push(e.data);
+};
+mediaRecorder.onstop = ()=> {
+    var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
+    this.socket.emit('radio', blob);
+};
+
+// Start recording
+mediaRecorder.start();
+
+// Stop recording after 5 seconds and broadcast it to server
+setInterval(()=> {
+    mediaRecorder.stop()
+    mediaRecorder.start()
+  }, 5);
+});
+
+// When the client receives a voice message it will play the sound
+this.socket.on('voice', function(arrayBuffer) {
+  var blob = new Blob([arrayBuffer], { 'type' : 'audio/ogg; codecs=opus' });
+  var audio = this.audioRef.current;
+  audio.src = window.URL.createObjectURL(blob);
+  audio.play();
+});
+  }
   startvideo=(e)=>{
       e.preventDefault()
     this.isDisabled();
@@ -175,7 +210,9 @@ class Live extends Component {
       }
   
       const constraints = {
-        audio: true,
+        audio: {
+          echoCancellation: true
+          },
         video: this.state.screenshare?{
           
                  displaySurface: 'monitor', // monitor, window, application, browser
@@ -257,7 +294,7 @@ return (
           ref={ this.localVideoref }
           autoPlay
           onClick={(e)=>{this.startvideo(e)}}
-          >
+          ><audio ref={this.audioRef} autoPlay style={{display:"none"}}/> 
         </video>:
         <img
           style={{
@@ -284,6 +321,7 @@ return (
     <div className="row xs-1" style={{justifyContent:"center"}}>
     <ButtonB id="contact-submit" onClick={this.screenShareHandler} text={share}/>
     <ButtonB id="contact-submit-danger" onClick={this.stopVideoPlay} disabled={this.state.disabled} text="End Video"/>
+    <ButtonB id="contact-submit-reset" onClick={this.audioPlay} disabled={this.state.disabled} text="Audio"/>
 
     </div>    
 

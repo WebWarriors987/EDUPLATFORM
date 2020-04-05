@@ -103,6 +103,13 @@ function roomList(){
 	io.emit('rooms',rooms)
 }
 
+io.on('voice', function(blob) {
+    // can choose to broadcast it to whoever you want
+    io.broadcast.emit('voice', blob);
+});
+
+
+
 function isUser(userList, username){
   	return username in userList
 }
