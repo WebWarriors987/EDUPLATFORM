@@ -788,8 +788,29 @@ blockquote::after
 
 .reg_col{
   margin:0 20px;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
 
 }
+
+@media(max-width:600px){
+  .reg_row{
+    display:flex;
+    flex-direction: column;
+    width:80%;
+    align-items: center;
+  }
+  .reg_col{
+    margin:20px 0;
+    display:flex;
+    flex-direction: row;
+    justify-content: stretch;
+  
+  }
+  
+}
+
 
 #email {
   font-size: 20px;
@@ -820,7 +841,7 @@ fieldset {
   border: medium none !important;
   margin: 0 0 10px;
   min-width: 100%;
-  padding: 0;
+  padding: 5px;
   width: 100%;
 }
 
@@ -831,7 +852,7 @@ fieldset {
   border-right: none;
   border-bottom: 1px solid rgb(158, 158, 158);
   background: #FFF;
-  margin: 0 0 5px;
+  margin: 0 0 5px 0;
   padding: 10px;
   transition: all 0.5s ease;
 }
@@ -850,6 +871,7 @@ fieldset {
   font-size: 15px;
   transition: all 0.5s ease;
 }
+
 
 #contact-submit-reset{
   cursor: pointer;
@@ -870,11 +892,19 @@ fieldset {
   box-shadow:0 0 5px rgb(252, 15, 15) ;  
   color: rgb(252, 15, 15);
   margin: 25px 0 25px;
-  padding: 10px;
+  padding:10px;
   font-size: 15px;
   transition: all 0.5s ease;
 
 }
+
+#contact-submit-danger a{
+  color: rgb(252, 15, 15);
+}
+#contact-submit-danger a:hover{
+  color: white;
+}
+
 #contact-submit-reset:hover{
   cursor: pointer;
   box-shadow:none ;  
@@ -1011,7 +1041,7 @@ fieldset {
 }
 
 .sidebar-wrapper .contact-list .email .svg-inline--fa {
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .sidebar-wrapper .container-block {

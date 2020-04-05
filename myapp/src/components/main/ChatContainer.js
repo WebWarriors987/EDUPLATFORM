@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {endsession} from '../actions/recordactions'
 import { Container, Row, Col, Jumbotron } from 'react-bootstrap';
+import ButtonB from '../UI/Button';
 
 const socketUrl = "https://eduplatformwebwarriors.herokuapp.com/"
 class ChatContainer extends Component {
@@ -157,7 +158,11 @@ class ChatContainer extends Component {
 					user={user}
 					typingUsers={activeChat.typingUsers}
 					/>
-					:null
+					:<Messages
+					messages={this.state.chats}
+					user={user}
+
+					/>
 					}
 					</div>
 					
@@ -176,15 +181,21 @@ class ChatContainer extends Component {
 				
 				
 				{this.props.user.userData.isAdmin?
-				<button
+				<div className="reg_row" style={{justifyContent:"center"}}>
+					
+					<ButtonB id="contact-submit-danger"
 				onClick={e=>this.endsession(e)}
 						type = "submit"
 						className = "send"
+						
 				>
-					<Link className = "contact-submit-reset" to="/livechat">
+					<Link style={{textDecoration:"none"}} to="/livechat">
 							 END SESSION
 					</Link>
-				</button>:
+				</ButtonB>
+
+				</div>
+				:
 				<button
 				type = "submit"
 				

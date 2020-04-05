@@ -11,7 +11,8 @@ class Live extends Component {
     super(props)
     this.state={
       images:'',
-      screenshare:false
+      screenshare:false,
+      disabled:false,
     }
     this.localVideoref = React.createRef()
     this.remoteVideoref = React.createRef()
@@ -152,7 +153,7 @@ class Live extends Component {
   }
   startvideo=(e)=>{
       e.preventDefault()
-
+    this.isDisabled();
       
     const success = (stream) => {
         const socket=this.state.socket
@@ -211,14 +212,26 @@ class Live extends Component {
   }
   stopVideoPlay=()=>{
     const stream = this.localVideoref.current.srcObject;
+    if(stream){
     const tracks = stream.getTracks();
-
-    tracks.forEach(function(track) {
-      track.stop();
-    });
+      tracks.forEach(function(track) {
+        track.stop();
+      });
+    }
+    this.setState({disabled:true})
+    
 
     this.localVideoref.current.srcObject = null;
 
+  }
+  isDisabled=()=>{
+
+    const stream = this.localVideoref.current.srcObject;
+    if(stream)
+    {
+      const tracks = stream.getTracks();
+      this.setState({disabled:false});
+    }
   }
   componentWillUnmount(){
     this.stopVideoPlay();
@@ -270,7 +283,7 @@ return (
     this.props.user.userData.isAdmin?
     <div className="row xs-1" style={{justifyContent:"center"}}>
     <ButtonB id="contact-submit" onClick={this.screenShareHandler} text={share}/>
-    <ButtonB id="contact-submit-danger" onClick={this.stopVideoPlay} text="End Video"/>
+    <ButtonB id="contact-submit-danger" onClick={this.stopVideoPlay} disabled={this.state.disabled} text="End Video"/>
 
     </div>    
 

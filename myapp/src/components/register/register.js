@@ -230,23 +230,27 @@ onrchange=(e)=>{
                     
                 </div>
 
-                <div className="row">
-                   <label style={{fontFamily:'algerian'}}> ARE YOU A TEACHER ? </label> 
-           <div className="row">
-           <div className="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                <div className="row" style={{width:"80%"}}>
+                    <div className="col">
+                    <label style={{fontFamily:'algerian'}}> ARE YOU A TEACHER ? </label> 
+
+                    </div>
+                    
+                    
+           <div className="col">
                 <input
                 type="radio"
                 value="1"
                 checked={this.state.value == 1}
                 onChange={(e)=>this.onrchange(e)}/>
                 </div>
-                <div className="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                <div className="col">
                 <label>YES</label>
                 </div>
-                </div>
                 
-                <div className="row">
-                <div className="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                
+                
+                <div className="col">
 
                 <input
                 type="radio"
@@ -254,14 +258,18 @@ onrchange=(e)=>{
                 checked={this.state.value == 0}
                 onChange={(e)=>this.onrchange(e)}/>
                 </div>
-                <div className="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                <div className="col">
                 <label>NO</label>
                 </div>
                 </div>
-                </div>
+
+                    
+           
+                
+                
  
-                <div className="reg_row_img">
-                <div className="reg_col">
+                <div className="row">
+                <div className="col">
                 <fieldset>
                     <button id="contact-submit" style={{padding:"10px"}} onClick={(event)=> this.submitform(event)}>
                         Create an account

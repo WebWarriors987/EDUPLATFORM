@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, FormGroup } from 'react-bootstrap';
 
 export default class MessageInput extends Component {
 
@@ -45,12 +45,16 @@ export default class MessageInput extends Component {
 								
 								
 							</Form.Group>
+							<FormGroup>
 							<Button style={{fontSize:"15px"}} 
 									disabled = { message.length < 1 }
 									variant="primary" 
 									type="submit">
 									Submit
 								</Button>
+
+							</FormGroup>
+							
 								
 								</Form>
 

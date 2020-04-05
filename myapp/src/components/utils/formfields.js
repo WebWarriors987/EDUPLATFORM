@@ -24,7 +24,7 @@ class FormFields extends Component {
         console.log(this.props.formdata)
         switch(this.props.formdata.element){
           case('input'):
-          template=(<div>
+          template=(<React.Fragment>
               {this.props.formdata.label?
             <div className="label_inputs" id="email"><label style={{fontFamily:'sans serif'}}>{this.props.formdata.config.name}</label></div>
             :null  
@@ -33,7 +33,7 @@ class FormFields extends Component {
             onChange={(event)=>{this.props.change({event,id})}} name={this.props.formdata.config.name}
             onBlur={(event)=> this.props.change({event,id,blur:true})}/>
           {this.showError()}
-          </div>)
+          </React.Fragment>)
         
         break;
         case('textarea'):

@@ -141,7 +141,7 @@ resetpassword=(event)=>{
 
                         </div>
                     </div>
-                <div className="reg_row_img">
+                <div className="reg_row">
                     <fieldset>
                     
                         {/* <button className="contact-submit" style={{padding:"10px"}}onClick={(event)=> this.submitform(event)}>
