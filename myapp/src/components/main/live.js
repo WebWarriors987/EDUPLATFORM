@@ -154,7 +154,7 @@ class Live extends Component {
   }
   ///lIVE STREAMING AUDIO JUGGAR
   audioPlay=()=>{
-    const {socket}=this.state;
+    const socket=this.state.socket;
     var constraints = { audio: true };
     navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
       var mediaRecorder = new MediaRecorder(mediaStream);
