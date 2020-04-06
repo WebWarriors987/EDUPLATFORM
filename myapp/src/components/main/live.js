@@ -153,30 +153,30 @@ class Live extends Component {
 }
   }
   ///lIVE STREAMING AUDIO JUGGAR
-  audioPlay=function(){
+  audioPlay=()=>{
     var constraints = { audio: true };
-navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
-var mediaRecorder = new MediaRecorder(mediaStream);
-mediaRecorder.onstart = ()=> {
-    this.chunks = [];
-};
-mediaRecorder.ondataavailable =(e)=> {
-    this.chunks.push(e.data);
-};
-mediaRecorder.onstop = ()=> {
-    const blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
-    this.state.socket.emit('radio', blob);
-};
+    navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
+      var mediaRecorder = new MediaRecorder(mediaStream);
+    mediaRecorder.onstart = function(e) {
+      this.chunks = [];
+  };
+  mediaRecorder.ondataavailable = function(e) {
+      this.chunks.push(e.data);
+  };
+  mediaRecorder.onstop = function(e) {
+      var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
+      this.state.socket.emit('radio', blob);
+  };
 
-// Start recording
-mediaRecorder.start();
+  // Start recording
+  mediaRecorder.start();
 
-// // Stop recording after 5 seconds and broadcast it to server
-setInterval(()=> {
-    mediaRecorder.stop()
-    mediaRecorder.start()
-  }, 5);
-})
+  // Stop recording after 5 seconds and broadcast it to server
+  setTimeout(function() {
+      mediaRecorder.stop()
+    mediaRecorder.start();
+
+  }, 5)})
 .catch(e=>{
   console.log('Error: ', e)
 });
