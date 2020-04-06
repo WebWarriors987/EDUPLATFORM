@@ -164,7 +164,7 @@ class Live extends Component {
   mediaRecorder.ondataavailable = function(e) {
       this.chunks.push(e.data);
   };
-  mediaRecorder.onstop = (e)=> {
+  mediaRecorder.onstop = function(e) {
       var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
       socket.emit('radio', blob);
   };
@@ -190,7 +190,7 @@ socket.on('voice', function(arrayBuffer) {
   audio.play();
 });
   }
-  
+
   startscreenshare=(e)=>{
     e.preventDefault()
     this.stopVideoPlay()
@@ -269,9 +269,6 @@ socket.on('voice', function(arrayBuffer) {
       }
   
       const constraints = {
-        audio: {
-          echoCancellation: true
-          },
         video:true
         
       }
