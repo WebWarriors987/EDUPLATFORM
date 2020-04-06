@@ -349,7 +349,7 @@ return (
         </video>:
         <img
           style={{
-            width:"150%",
+            width:"100%",
             height:"600px",
             margin: 5,
 
