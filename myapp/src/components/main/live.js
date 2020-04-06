@@ -140,17 +140,14 @@ class Live extends Component {
     viewVideo=(video,context)=>{
       if(this.props.user.userData.isAdmin){
         const canvasImg=new Image();
-        canvasImg.onload=()=>{
+        
           this.context.drawImage(video,0,0,context.width,context.height);
     const roomname=this.props.roomname
     const y=this.canvasref.current.toDataURL('image/png')
     console.log(y)
     this.state.socket.emit('videostream',y,roomname);
-
-    }
-
-    
-}
+   
+                                           }
   }
   ///lIVE STREAMING AUDIO JUGGAR
   audioPlay=()=>{
