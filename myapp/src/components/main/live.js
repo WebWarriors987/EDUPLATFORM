@@ -143,7 +143,7 @@ class Live extends Component {
     
           this.context.drawImage(video,0,0,context.width,context.height);
     const roomname=this.props.roomname
-    const y=this.canvasref.current.toDataURL('image/png')
+    const y=this.canvasref.current.toDataURL('image/webp')
     console.log(y)
     this.state.socket.emit('videostream',y,roomname);
 
@@ -153,7 +153,7 @@ class Live extends Component {
 }
   }
   ///lIVE STREAMING AUDIO JUGGAR
-  audioPlay=()=>{
+  audioPlay=function(){
     var constraints = { audio: true };
 navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
 var mediaRecorder = new MediaRecorder(mediaStream);
@@ -164,7 +164,7 @@ mediaRecorder.ondataavailable =(e)=> {
     this.chunks.push(e.data);
 };
 mediaRecorder.onstop = ()=> {
-    var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
+    const blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
     this.state.socket.emit('radio', blob);
 };
 
@@ -352,7 +352,7 @@ return (
         </video>:
         <img
           style={{
-            width:"150%",
+            width:"100%",
             height:"600px",
             margin: 5,
 
@@ -365,7 +365,7 @@ return (
 {
       this.props.user.userData.isAdmin?
         
-      <canvas width="400" height="200" style={{display:"none",width:"1600px",height:"700px"}} id="preview" ref={ this.canvasref }></canvas>
+      <canvas width="800" height="500" style={{display:"none"}} id="preview" ref={ this.canvasref }></canvas>
       
       
       :null
