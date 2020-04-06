@@ -143,7 +143,7 @@ class Live extends Component {
     
           this.context.drawImage(video,0,0,context.width,context.height);
     const roomname=this.props.roomname
-    const y=this.canvasref.current.toDataURL('image/png')
+    const y=this.canvasref.current.toDataURL('image/webp')
     console.log(y)
     this.state.socket.emit('videostream',y,roomname);
 
@@ -155,13 +155,13 @@ class Live extends Component {
 navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
 var mediaRecorder = new MediaRecorder(mediaStream);
 mediaRecorder.onstart = ()=> {
-    this.chunks = [];
+    let chunks = [];
 };
 mediaRecorder.ondataavailable =(e)=> {
-    this.chunks.push(e.data);
+    chunks.push(e.data);
 };
 mediaRecorder.onstop = ()=> {
-    var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
+    var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
     this.state.socket.emit('radio', blob);
 };
 
@@ -362,7 +362,7 @@ return (
 {
       this.props.user.userData.isAdmin?
         
-      <canvas width="400" height="200" style={{display:"none",width:"1600px",height:"700px"}} id="preview" ref={ this.canvasref }></canvas>
+      <canvas width="800" height="500" style={{display:"none",width:"1600px",height:"700px"}} id="preview" ref={ this.canvasref }></canvas>
       
       
       :null
