@@ -143,7 +143,7 @@ class Live extends Component {
     
           this.context.drawImage(video,0,0,context.width,context.height);
     const roomname=this.props.roomname
-    const y=this.canvasref.current.toDataURL('image/webp')
+    const y=this.canvasref.current.toDataURL('image/png')
     console.log(y)
     this.state.socket.emit('videostream',y,roomname);
 
@@ -362,7 +362,7 @@ return (
 {
       this.props.user.userData.isAdmin?
         
-      <canvas width="700" height="450" style={{display:"none",width:"1600px",height:"700px"}} id="preview" ref={ this.canvasref }></canvas>
+      <canvas width="400" height="200" style={{display:"none",width:"1600px",height:"700px"}} id="preview" ref={ this.canvasref }></canvas>
       
       
       :null
