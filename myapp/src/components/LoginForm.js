@@ -63,7 +63,14 @@ class LoginForm extends Component {
 				<Container>
 					<Row xs={1}>
 					<Jumbotron style={{width:"60%"}} xs={12}>
-						<h1>Enter Room name:</h1>
+					<label htmlFor="nickname">
+						{
+							this.props.user.userData.isAdmin?
+							<h2 style={{fontSize:"40px",margin:""}}>Create the room and give the name only to your students </h2>
+							:
+						<h2 style={{fontSize:"40px"}}>Enter the room name given by your instructor</h2>
+	                    }
+					</label>
 						<p>
 						<Card style={{width:"80%"}} xs={12}>
 							<Card.Body>
