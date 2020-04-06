@@ -189,6 +189,7 @@ this.state.socket.on('voice', function(arrayBuffer) {
   audio.play();
 });
   }
+  
   startscreenshare=(e)=>{
     e.preventDefault()
     this.stopVideoPlay()
