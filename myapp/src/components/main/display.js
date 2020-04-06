@@ -11,7 +11,7 @@ class Disp extends Component {
   
 componentDidMount(){
     this.props.dispatch(getrecords()).then(response=>{
-        console.log(response.payload.images[0].url)
+        // console.log(response.payload.images[0].url)
         this.setState({
 
           ...response.payload,

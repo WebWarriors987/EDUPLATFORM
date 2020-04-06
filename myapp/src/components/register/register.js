@@ -117,14 +117,14 @@ updateform=(element)=>{
 }
 
 submitform=(event)=>{
-    console.log("Dfdf")
+   ///// console.log("Dfdf")
 event.preventDefault();
 const isformvalid=validform(this.state.formdata,'register')
 const data=generatedata(this.state.formdata,'register')
-console.log(data)
-console.log(isformvalid)
+//console.log(data)
+//console.log(isformvalid)
 if(isformvalid){
-    console.log("lll")
+    ///console.log("lll")
     this.props.dispatch(registeruser(data)).then((response)=>{
         
         if(response.payload.success){
@@ -136,20 +136,20 @@ if(isformvalid){
             })
             setTimeout(()=>{
             this.props.history.push('/login')
-            console.log('dffdfd')
+            //console.log('dffdfd')
             },5000)}
             else{
                 this.setState({
                     formError:true
                 })
-                console.log('sddsd')
+                //console.log('sddsd')
             }
         }
     )}
 }
 
 onrchange=(e)=>{
-    console.log(e.target.value)
+    //console.log(e.target.value)
     const newformdata=this.state.formdata
 
     newformdata['role'].value=e.target.value
@@ -161,7 +161,7 @@ onrchange=(e)=>{
     this.setState({
       value:e.target.value
     })
-    console.log(this.state)
+    //console.log(this.state)
 }
     render() {
         return (

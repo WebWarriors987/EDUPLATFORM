@@ -38,21 +38,21 @@ updateform=(element)=>{
 }
 
 submitform=(event)=>{
-    console.log("Dfdf")
+    // console.log("Dfdf")
 event.preventDefault();
 const isformvalid=validform(this.state.formdata,'register')
 const data=generatedata(this.state.formdata,'register')
-console.log(data)
-console.log(isformvalid)
+// console.log(data)
+// console.log(isformvalid)
 if(isformvalid){
-    console.log("lll")
+    // console.log("lll")
     this.setState({
         data:data,
         loading:true
     })
     this.props.dispatch(forget(data)).then((response)=>{
    
-        console.log(response)
+        // console.log(response)
             }).catch(err=>console.log(err))
 
         }

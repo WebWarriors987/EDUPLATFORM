@@ -84,7 +84,7 @@ if(isformvalid){
          }
          
             else{
-                console.log(this.props.user.member)
+                //console.log(this.props.user.member)
                 this.setState({
                     formError:true,
                     show:this.props.user.member.message

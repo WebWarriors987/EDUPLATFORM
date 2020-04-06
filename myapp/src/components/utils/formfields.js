@@ -21,7 +21,7 @@ class FormFields extends Component {
     generateform=()=>{
         let template=null;
         let id=this.props.id
-        console.log(this.props.formdata)
+        // console.log(this.props.formdata)
         switch(this.props.formdata.element){
           case('input'):
           template=(<React.Fragment>

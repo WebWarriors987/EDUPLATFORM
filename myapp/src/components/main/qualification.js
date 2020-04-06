@@ -64,9 +64,9 @@ updateform=(element)=>{
 submitform=(event)=>{
     event.preventDefault();
     const isformvalid=validform(this.state.formdata,'add')
-    console.log(isformvalid)
+    //console.log(isformvalid)
     const data=generatedata(this.state.formdata,'add')
-    console.log(data)
+    //console.log(data)
     if(true){
         this.props.dispatch(addeducation(data,this.props.user.member.member.email)).then((response)=>{
             if(response.payload.success){
@@ -85,7 +85,7 @@ submitform=(event)=>{
         )}
     }
 imageHandler=(images)=>{
-    console.log(images)
+    //console.log(images)
     const newFormData={
         ...this.state.formdata
     }

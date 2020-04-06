@@ -57,11 +57,11 @@ updateform=(element)=>{
 }
 
 submitform=(event)=>{
-console.log('ggg')
+// console.log('ggg')
 event.preventDefault();
 const isformvalid=validform(this.state.formdata,'register')
 const data=generatedata(this.state.formdata,'register')
-console.log(queryString.parse(this.props.location.search))
+// console.log(queryString.parse(this.props.location.search))
 if(isformvalid){
     this.props.dispatch(forgetpass(queryString.parse(this.props.location.search),data)).then((response)=>{
         if(response.payload.success){
@@ -73,7 +73,7 @@ if(isformvalid){
             })
             setTimeout(()=>{
             this.props.history.push('/login')
-            console.log('dffdfd')
+            // console.log('dffdfd')
             },5000)}
             else{
                 this.setState({

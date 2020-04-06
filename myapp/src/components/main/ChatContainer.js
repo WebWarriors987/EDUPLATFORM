@@ -44,26 +44,26 @@ class ChatContainer extends Component {
 		
 				this.setState({socket:socket})
 				socket.on("activemessage",(message,user)=>{
-					console.log(message)
+					// console.log(message)
 					this.setActiveChat(message)
 					   let	newchat=[...this.state.chats,message]
 				 this.setState({
 					chats:newchat
 							 })
-				   console.log(this.state.chat)
+				//    console.log(this.state.chat)
 				   })
 			}
 	componentDidMount() {
 		const socket=this.state.socket
-		console.log(this.state.roomname)
+		// console.log(this.state.roomname)
 		socket.on("verifyroom",(roomlist)=>{
-			console.log(roomlist)
+			// console.log(roomlist)
 		})
 
 		if(this.props.user.userData.isAdmin){
 			
 			socket.on('verifyroom',(roomlist)=>{
-				console.log(roomlist)
+				// console.log(roomlist)
 			   if(roomlist.includes(this.state.roomname)){
 				
 					this.props.history.push(`/livechat?answer='ROOM ALREADY PRESENT'`);
@@ -90,7 +90,7 @@ class ChatContainer extends Component {
 		//  })
 		
 		socket.on('verifyroom',(roomlist)=>{
-			console.log(roomlist)
+			// console.log(roomlist)
 		   if(roomlist.includes(this.state.roomname)){
 			
 			socket.emit('subscribe',this.state.roomname)
@@ -107,7 +107,7 @@ class ChatContainer extends Component {
 	
 	
 	sendMessage = ( message)=>{
-		console.log(message,this.state.roomname,this.state.name)
+		// console.log(message,this.state.roomname,this.state.name)
 		
 		const roomname=this.state.roomname
 		const name=this.state.name
@@ -126,13 +126,13 @@ class ChatContainer extends Component {
 		e.preventDefault()
 		const user=this.props.user.userData.name
 		this.props.dispatch(endsession(this.state.roomname,this.props.user.userData.email)).then((res)=>{
-           console.log(res)
+        //    console.log(res)
 		}).catch(e=>console.log(e))
 	
 	}
 
 	render() {
-		console.log(this.state.chats)
+		// console.log(this.state.chats)
 		const { user, logout } = this.props
 		const { chats, activeChat } = this.state
 		return (
