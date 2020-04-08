@@ -176,7 +176,7 @@ class Live extends Component {
   mediaRecorder.onstop = function(e) {
       var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
       console.log(blob)
-      socket.emit('radio', blob,roomname);
+      socket.emit('radio',blob,roomname);
   };
 
   // Start recording
@@ -186,7 +186,7 @@ class Live extends Component {
   setInterval(function() {
       mediaRecorder.stop()
     mediaRecorder.start();
-  }, 5)})
+  }, 5000)})
 
 .catch(e=>{
   console.log('Error: ', e)
