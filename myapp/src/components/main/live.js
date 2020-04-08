@@ -183,11 +183,11 @@ class Live extends Component {
   mediaRecorder.start();
 
   // Stop recording after 5 seconds and broadcast it to server
-  setTimeout(function() {
+  setInterval(function() {
       mediaRecorder.stop()
     mediaRecorder.start();
-
   }, 5)})
+
 .catch(e=>{
   console.log('Error: ', e)
 });
