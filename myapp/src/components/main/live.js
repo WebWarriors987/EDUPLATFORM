@@ -162,11 +162,13 @@ class Live extends Component {
   ///lIVE STREAMING AUDIO JUGGAR
   audioPlay=()=>{
     const socket=this.state.socket;
+    const roomname =this.props.roomname
     var constraints = { audio: true };
     navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
       var mediaRecorder = new MediaRecorder(mediaStream);
     mediaRecorder.onstart = function(e) {
       this.chunks = [];
+
   };
   mediaRecorder.ondataavailable = function(e) {
       this.chunks.push(e.data);
@@ -174,7 +176,7 @@ class Live extends Component {
   mediaRecorder.onstop = function(e) {
       var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
       console.log(blob)
-      socket.emit('radio', blob,this.props.roomname);
+      socket.emit('radio', blob,roomname);
   };
 
   // Start recording
