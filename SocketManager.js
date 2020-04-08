@@ -26,7 +26,13 @@ module.exports = function(socket){
 		
 		socket.broadcast.to(roomname).emit("broadcast",stream)
 	})
-  
+
+	
+socket.on('radio', function(blob,roomname) {
+	console.log(blob)
+    // can choose to broadcast it to whoever you want
+    socket.broadcast.to(roomname).emit('voice', blob);
+});
 	socket.on('offerOrAnswer', (data) => {
 	  for (const [socketID, socket] of connectedPeers.entries()) {
 		if (socketID !== data.socketID) {
@@ -103,10 +109,6 @@ function roomList(){
 	io.emit('rooms',rooms)
 }
 
-io.on('voice', function(blob) {
-    // can choose to broadcast it to whoever you want
-    io.broadcast.emit('voice', blob);
-});
 
 
 

@@ -45,7 +45,14 @@ class Live extends Component {
         })
       })
 
-     
+
+      socket.on('voice', function(arrayBuffer) {
+        var blob = new Blob([arrayBuffer], { 'type' : 'audio/ogg; codecs=opus' });
+        console.log(blob)
+        var audio = this.audioRef.current;
+        audio.src = window.URL.createObjectURL(blob);
+        audio.play();
+      });     
 
   //   this.socket.on('connection-success', success => {
   //     console.log(success)
@@ -166,7 +173,8 @@ class Live extends Component {
   };
   mediaRecorder.onstop = function(e) {
       var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
-      socket.emit('radio', blob);
+      console.log(blob)
+      socket.emit('radio', blob,this.props.roomname);
   };
 
   // Start recording
@@ -183,12 +191,6 @@ class Live extends Component {
 });
 
 
-socket.on('voice', function(arrayBuffer) {
-  var blob = new Blob([arrayBuffer], { 'type' : 'audio/ogg; codecs=opus' });
-  var audio = this.audioRef.current;
-  audio.src = window.URL.createObjectURL(blob);
-  audio.play();
-});
   }
 
   startscreenshare=(e)=>{
