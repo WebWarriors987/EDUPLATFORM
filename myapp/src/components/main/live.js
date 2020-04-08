@@ -46,7 +46,7 @@ class Live extends Component {
       })
 
 
-      socket.on('voice', function(arrayBuffer) {
+      socket.on('voice', (arrayBuffer)=> {
         var blob = new Blob([arrayBuffer], { 'type' : 'audio/ogg; codecs=opus' });
         console.log(blob)
         var audio = this.audioRef.current;
