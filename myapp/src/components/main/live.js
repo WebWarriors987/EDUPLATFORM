@@ -50,7 +50,7 @@ class Live extends Component {
         var blob = new Blob([arrayBuffer], { 'type' : 'audio/ogg; codecs=opus' });
         console.log(blob)
         var audio = this.audioRef.current;
-        audio.src = window.URL.createObjectURL(blob);
+        audio.srcObject = window.URL.createObjectURL(blob);
         audio.play();
       });     
 
@@ -351,7 +351,7 @@ return (
           ref={ this.localVideoref }
           autoPlay
           
-          ><audio ref={this.audioRef} style={{display:"none"}}/> 
+          ><audio ref={this.audioRef} style={{display:"none"}} autoPlay/> 
         </video>:
         <img
           style={{

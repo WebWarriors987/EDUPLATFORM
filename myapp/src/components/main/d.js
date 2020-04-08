@@ -1,184 +1,407 @@
+
 import React, { Component } from 'react';
+
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import four from '../../images/4.png' 
-import five from '../../images/3.jpg'
-import six from '../../images/1.jpg'
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import img from "../../images/snap.png"
+import { Jumbotron, Row, Col, Container } from 'react-bootstrap';
+import ButtonB from '../UI/Button';
 
-const useStyles = makeStyles(theme => ({
-  root: {   
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-  inline: {
-    display: 'inline',
-  },
-}));
-const Main = () => {
+class Live extends Component {
+  constructor(props) {
+    super(props)
+    this.state={
+      images:'',
+      screenshare:false,
+      disabled:false,
+    }
+    this.localVideoref = React.createRef()
+    this.audioRef=React.createRef()
+    this.remoteVideoref = React.createRef()
+    this.canvasref = React.createRef()
 
-  const classes = useStyles();
- const newslist=()=>(
-   this.state.news?
-   <div>
-     <ListItem alignItems="flex-start">
-     
-     <ListItemText
-       primary="Brunch this weekend?"
-       secondary={
-         <React.Fragment>
-           <Typography
-             component="span"
-             variant="body2"
-             className={classes.inline}
-             color="textPrimary"
-           >
-             Ali Connors
-           </Typography>
-           {" — I'll be in your neighborhood doing errands this…"}
-         </React.Fragment>
-       }
-     />
-   </ListItem>
-   <Divider variant="inset" component="li" />
-   </div>
-   :null
-  )
-    return (
-        <div className="container">
-         
-    <div id="myCarousel" className="carousel slide" data-ride="carousel" style={{objectFit:"cover"}}>
-      <ol className="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
-      <div className="carousel-inner">
-  
-        <div className="item active" style={{objectFit:"cover"}}>
-          <img src={four} alt="chess" />
-          <div className="carousel-caption">
-          </div>
-        </div>
-  
-        <div className="item">
-          <img src={five} alt="chess"/>
-          <div className="carousel-caption">
-          </div>
-        </div>
-      
-        <div className="item" style={{objectFit:"cover"}}>
-          <img src={six} alt="chess"/>
-          <div className="carousel-caption">
-          </div>
-        </div>
-    
-      </div>
-  
-      <a className="left carousel-control" href="#myCarousel" data-slide="prev">
-        <span className="glyphicon glyphicon-chevron-left"></span>
-        <span className="sr-only">Previous</span>
-      </a>
-      <a className="right carousel-control" href="#myCarousel" data-slide="next">
-        <span className="glyphicon glyphicon-chevron-right"></span>
-        <span className="sr-only">Next</span>
-      </a>
-    
-  </div>
-        
-        
-          <div className="row" id="about">
-           
-           <div className="col-lg-12 col-sm-12 col-md-12 description" >
-               
-           <h1 style={{color:"black"}}>ABOUT CHESS</h1>
-               <div className="circle">
-
-               </div>
-               <p style={{fontFamily: "'Lobster Two', cursive"}}>The Chemical Engineering Student's Society (CHESS) is an independent student run society of Chemical Engineering Department of NIT Durgapur.It is solely dedicated to form a network
-                 among all the students,faculty members and alumni of the department. It promotes interaction  within the department and implements acadmeic, social and other programs of interest to its members.
-               
-               </p>
-           
-           
-           </div>
-           </div>
-          <div className="row">
-           <div id="box">
-            <div id="smallbox">
-                <i className="fas fa-user-graduate" id="cap1" style={{fontSize:"40px",color:"#E39821"}}>
-                    <h3 id="faculty"><Link to="/facad">FACULTY</Link></h3></i>
-            </div>
-            <div id="smallbox">
-                <i className="fas fa-graduation-cap" id="cap1" style={{fontSize:"40px",color:"#E39821"}}>
-                    <h3 id="faculty"><Link to="/subject">SYLLABUS</Link></h3></i>
-           </div>
-           
-           <div id="smallbox">
-            <i className="fa fa-book" id="cap1"style={{fontSize:"40px",color:"#E39821"}}>
-            <h3 id="faculty"><Link to="/register">REGISTER</Link></h3></i>
-           </div>
-           <div id="smallbox">
-            <i className="fa fa-lock" id="cap1" style={{fontSize:"40px",color:"#E39821"}}>
-            <h3 id="faculty"><Link to="/login">LOGIN</Link></h3></i>
-           </div>
-             
-        </div>
-         </div>
-         <div className="row" id="about">
-           
-           <div className="col-lg-12 col-sm-12 col-md-12 description" >
-               
-           <h1 style={{color:"black"}}>MESSAGE FROM HOD:Prof Gopinath Halder</h1>
-               <div className="circler">
-
-               </div>
-           
-               <p style={{fontFamily: "'Lobster Two', cursive"}}>Chemical Engineering Students'society is working with a motivation of developing professional
-and personal skills of students,which facilitate them to perform magnificently as an eminent
-engineer in the society. This society is aimed to provide a platform to showcase and sharpen
-student's talents through a variety of events and activities planned throughout four years,
-for overall development of students personalities. We continue our effort to prepare and
-guide the students for the various competitive exams and interviews so that they perform
-better and make their carrier in the selected fields. Real world problems will be blended in
-the curriculum and these are to be taught by experts from industry, in addition through guest
-lectures. Our focus is to effectively train our students as chemical engineers who can serve the
-society competently, collaboratively and ethically as planners, designers and operators of the
-environment.
-               </p>
-           
-           
-           </div>
-        
-        </div>
-        <br></br>
-        <br></br>
-        <br></br>
-        <div className="row">
-           <List className={classes.root}>
-            { newslist()}
-    </List>
-    </div>
-        </div>
-           
-    );
-};
-
-
-const mapStateToProps=(state)=>{
-    
-       
-  return{
-    user:state.member,
+    this.socket = this.props.socket
+    this.candidates = []
   }
+
+  componentWillMount(){
+    this.setState({socket:this.props.socket})
+
+  }
+  componentDidMount = () => {
+    const socket=this.state.socket
+      
+    if(this.props.user.userData.isAdmin){
+      this.context = this.canvasref.current.getContext('2d');
+      this.context.width = this.canvasref.current.width;
+      this.context.height = this.canvasref.current.height;
+    }
+
+
+
+      socket.on("broadcast",(stream)=>{
+        // console.log(stream)
+        this.setState({
+          images:stream
+        })
+      })
+
+
+      socket.on('voice', (arrayBuffer)=> {
+        var blob = new Blob([arrayBuffer], { 'type' : 'audio/ogg; codecs=opus' });
+        console.log(blob)
+        var audio = this.audioRef.current;
+        audio.src = window.URL.createObjectURL(blob);
+        audio.play();
+      });     
+
+  //   this.socket.on('connection-success', success => {
+  //     console.log(success)
+  //   })
+
+  //   this.socket.on('offerOrAnswer', (sdp) => {
+  //   //   this.textref.value = JSON.stringify(sdp)
+  //     this.pc.setRemoteDescription(new RTCSessionDescription(sdp))
+  //   })
+
+  //   this.socket.on('candidate', (candidate) => {
+  //     this.pc.addIceCandidate(new RTCIceCandidate(candidate))
+  //   })
+
+  //   const pc_config = {
+  //     "iceServers": [
+  //       {
+  //         urls : 'stun:stun.l.google.com:19302'
+  //       },
+  //       {
+  //         url: 'turn:192.158.29.39:3478?transport=tcp',
+  //         credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+  //         username: '28224511:1379330808'
+  //       }
+        
+  //     ]
+  //   }
+
+  //   this.pc = new RTCPeerConnection(pc_config)
+
+  //   this.pc.onicecandidate = (e) => {
+  //     if (e.candidate) {
+  //       this.sendToPeer('candidate', e.candidate)
+  //     }
+  //   }
+    
+
+  //   this.pc.oniceconnectionstatechange = (e) => {
+  //     console.log(e)
+  //   }
+
+  //   this.pc.onaddstream = (e) => {
+  //     this.remoteVideoref.current.srcObject = e.stream
+  //   }
+
+  // }
+
+  // sendToPeer = (messageType, payload) => {
+  //   this.socket.emit(messageType, {
+  //     socketID: this.socket.id,
+  //     payload
+  //   })
+  // }
+
+  // createOffer = () => {
+
+  //   console.log('Offer')
+  //   this.pc.createOffer({ offerToReceiveVideo: 1 })
+  //     .then(sdp => {
+  //       this.pc.setLocalDescription(sdp)
+
+  //       this.sendToPeer('offerOrAnswer', sdp)
+        
+ 
+  //   })
+
+  }
+
+  // createAnswer = () => {
+  //   console.log('Answer')
+  //   this.pc.createAnswer({ offerToReceiveVideo: 1 })
+  //     .then(sdp => {
+  //       this.pc.setLocalDescription(sdp)
+
+  //       this.sendToPeer('offerOrAnswer', sdp)
+  //   })
+  // }
+
+  // setRemoteDescription = () => {
+  //   const desc = JSON.parse(this.textref.value)
+
+  //   this.pc.setRemoteDescription(new RTCSessionDescription(desc))
+  // }
+
+  // addCandidate = () => {
+
+  //   this.candidates.forEach(candidate => {
+  //     console.log(JSON.stringify(candidate))
+  //     this.pc.addIceCandidate(new RTCIceCandidate(candidate))
+  //   });
+  // }
+    viewVideo=(video,context)=>{
+      if(this.props.user.userData.isAdmin){
+        
+    
+          this.context.drawImage(video,0,0,context.width,context.height);
+    const roomname=this.props.roomname
+    const y=this.canvasref.current.toDataURL('image/webp')
+    console.log(y)
+    this.state.socket.emit('videostream',y,roomname);
+
+    
+
     
 }
+  }
+  ///lIVE STREAMING AUDIO JUGGAR
+  audioPlay=()=>{
+    const socket=this.state.socket;
+    const roomname =this.props.roomname
+    var constraints = { audio: true };
+    navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
+      var mediaRecorder = new MediaRecorder(mediaStream);
+    mediaRecorder.onstart = function(e) {
+      this.chunks = [];
 
-export default connect(mapStateToProps)(Main);
+  };
+  mediaRecorder.ondataavailable = function(e) {
+      this.chunks.push(e.data);
+  };
+  mediaRecorder.onstop = function(e) {
+      var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
+      console.log(blob)
+      socket.emit('radio',blob,roomname);
+  };
+
+  // Start recording
+  mediaRecorder.start();
+
+  // Stop recording after 5 seconds and broadcast it to server
+  setInterval(function() {
+      mediaRecorder.stop()
+    mediaRecorder.start();
+  }, 500)})
+
+.catch(e=>{
+  console.log('Error: ', e)
+});
+
+
+  }
+
+  startscreenshare=(e)=>{
+    e.preventDefault()
+    this.stopVideoPlay()
+    
+      
+    const success = (stream) => {
+        const socket=this.state.socket
+        const roomname=this.props.roomname
+        // this.socket.emit("videostream",{stream,roomname})
+        window.localStream = stream
+        //console.log('cxcx')
+        this.localVideoref.current.srcObject = stream
+         let u=this.localVideoref
+         let c=this.context
+        setInterval(()=>{
+          
+          this.viewVideo(u.current,c)
+        },5);
+        //this.pc.addStream(stream)
+      }
+   const failure = (e) => {
+        console.log('Error: ', e)
+      }
+  
+      const constraints = {
+        audio: {
+          echoCancellation: true
+          },
+        video:{
+          
+                 displaySurface: 'monitor', // monitor, window, application, browser
+            logicalSurface: true,
+            cursor: 'always' // never, always, motion
+        
+        }
+        
+      }
+      // var getUserMedia = navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;  
+      
+      navigator.mediaDevices.getDisplayMedia(constraints)
+      .then(success)
+      .catch(failure)
+      
+        // this.props.user.userData.isAdmin?
+        // setInterval(()=>{
+        //    this.createOffer() 
+        //     },2000):
+        //     console.log('hurray')
+    
+    }
+
+  
+
+
+  startvideo=(e)=>{
+      e.preventDefault()
+    this.stopVideoPlay();
+      
+    const success = (stream) => {
+        const socket=this.state.socket
+        const roomname=this.props.roomname
+        // this.socket.emit("videostream",{stream,roomname})
+        window.localStream = stream
+        console.log('cxcx')
+        this.localVideoref.current.srcObject = stream
+         let u=this.localVideoref
+         let c=this.context
+        setInterval(()=>{
+          
+          this.viewVideo(u.current,c)
+        },5);
+        //this.pc.addStream(stream)
+      }
+   const failure = (e) => {
+        console.log('Error: ', e)
+      }
+  
+      const constraints = {
+        video:true
+        
+      }
+      // var getUserMedia = navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;  
+      
+      navigator.mediaDevices.getUserMedia(constraints)
+      .then(success)
+      .catch(failure)
+  
+        // this.props.user.userData.isAdmin?
+        // setInterval(()=>{
+        //    this.createOffer() 
+        //     },2000):
+        //     console.log('hurray')
+    
+    }
+
+  //   screenShareHandler=()=>{
+        
+  //     this.setState({screenshare:this.state.screenshare?false:true})
+
+      
+    
+    
+  // }
+  stopVideoPlay=()=>{
+    if(this.localVideoref.current){
+    const stream = this.localVideoref.current.srcObject;
+    if(stream){
+      const tracks = stream.getTracks();
+      tracks.forEach(function(track) {
+        track.stop();
+      });
+    }
+    
+    
+   
+    
+
+    this.localVideoref.current.srcObject = null;
+  }
+
+  }
+  // isDisabled=()=>{
+
+  //   const stream = this.localVideoref.current.srcObject;
+  //   if(stream)
+  //   {
+  //     const tracks = stream.getTracks();
+  //     this.setState({disabled:false});
+  //   }
+  // }
+
+
+  componentWillUnmount(){
+    this.stopVideoPlay();
+  }
+
+  render(){
+//console.log( this.props.user.userData.isAdmin)
+// const share=this.state.screenshare?"Click video to start screen-sharing":"Click Video to start live-streaming";
+  
+return (
+
+      <Container fluid>
+        
+        {
+      this.props.user.userData.isAdmin?
+        <video
+          style={{
+            width:"100%",
+            margin:"5px",
+            background:"black",
+            border:"4px solid black"
+          }}
+          ref={ this.localVideoref }
+          autoPlay
+          
+          ><audio ref={this.audioRef} style={{display:"none"}}/> 
+        </video>:
+        <img
+          style={{
+            width:"100%",
+            height:"600px",
+            margin: 5,
+
+            border:"1px solid black"
+          }}
+          src={this.state.images}
+          />
+  }
+
+{
+      this.props.user.userData.isAdmin?
+        
+      <canvas width="800" height="500" style={{display:"none"}} id="preview" ref={ this.canvasref }></canvas>
+      
+      
+      :null
+  }
+  {
+    this.props.user.userData.isAdmin?
+    <div className="row xs-1" style={{justifyContent:"center"}}>
+    <ButtonB id="contact-submit" onClick={(e)=>{this.startvideo(e)}} text={"Start Video"}/>
+    <ButtonB id="contact-submit" onClick={(e)=>{this.startscreenshare(e)}} text={"Start ScreenShare"}/>
+    <ButtonB id="contact-submit-danger" onClick={this.stopVideoPlay} disabled={this.state.disabled} text="End Video"/>
+    <ButtonB id="contact-submit-reset" onClick={this.audioPlay} disabled={this.state.disabled} text="Audio"/>
+
+    </div>    
+
+    
+   
+    :null
+  }
+
+      
+      
+
+      </Container>
+    )
+  }
+}
+
+const mapStateToProps=(state)=>{
+       
+    return{
+      user:state.member
+    }
+      
+}
+
+export default connect(mapStateToProps)(Live);
