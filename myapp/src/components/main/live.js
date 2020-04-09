@@ -51,7 +51,6 @@ class Live extends Component {
         console.log(blob)
         var audio = this.remoteVideoref.current;
         this.remoteVideoref.current.src = window.URL.createObjectURL(blob);
-          audio.play();
       });     
 
   //   this.socket.on('connection-success', success => {
