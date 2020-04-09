@@ -49,8 +49,8 @@ class Live extends Component {
       socket.on('voice', (arrayBuffer)=> {
         var blob = new Blob(arrayBuffer);
         console.log(blob)
-        var audio = this.remoteVideoRef.current;
-        this.remoteVideoRef.current.srcObject = window.URL.createObjectURL(blob);
+        var audio = this.remoteVideoref.current;
+        this.remoteVideoref.current.srcObject = window.URL.createObjectURL(blob);
           audio.play();
       });     
 
