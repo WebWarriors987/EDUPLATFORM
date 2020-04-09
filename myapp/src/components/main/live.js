@@ -50,7 +50,7 @@ class Live extends Component {
         var blob = new Blob([arrayBuffer], { 'type' : 'audio/ogg; codecs=opus' });
         console.log(blob)
         var audio = this.audioRef.current;
-        audio.srcObject = window.URL.createObjectURL(blob);
+        this.audioRef.current.srcObject = window.URL.createObjectURL(blob);
         audio.play();
       });     
 
@@ -257,15 +257,38 @@ class Live extends Component {
         const socket=this.state.socket
         const roomname=this.props.roomname
         // this.socket.emit("videostream",{stream,roomname})
+    
         window.localStream = stream
         console.log('cxcx')
         this.localVideoref.current.srcObject = stream
-         let u=this.localVideoref
-         let c=this.context
-        setInterval(()=>{
+        var mediaRecorder = new MediaRecorder(mediaStream);
+        mediaRecorder.onstart = function(e) {
+          this.chunks = [];
+    
+      };
+      mediaRecorder.ondataavailable = function(e) {
+          this.chunks.push(e.data);
+      };
+      mediaRecorder.onstop = function(e) {
+          var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
+          console.log(blob)
+          socket.emit('radio',blob,roomname);
+      };
+    
+      // Start recording
+      mediaRecorder.start();
+    
+      // Stop recording after 5 seconds and broadcast it to server
+      setInterval(function() {
+          mediaRecorder.stop()
+        mediaRecorder.start();
+      }, 500)
+        //  let u=this.localVideoref
+        //  let c=this.context
+        // setInterval(()=>{
           
-          this.viewVideo(u.current,c)
-        },5);
+        //   this.viewVideo(u.current,c)
+        // },5);
         //this.pc.addStream(stream)
       }
    const failure = (e) => {
@@ -351,7 +374,7 @@ return (
           ref={ this.localVideoref }
           autoPlay
           
-          ><audio ref={this.audioRef} style={{display:"none"}} autoPlay/> 
+          > 
         </video>:
         <img
           style={{
@@ -365,6 +388,14 @@ return (
           />
   }
 
+{
+      this.props.user.userData.isAdmin?
+        
+      null
+      
+      :<audio ref={this.audioRef} style={{display:"none"}} autoPlay/>
+  }
+  
 {
       this.props.user.userData.isAdmin?
         
