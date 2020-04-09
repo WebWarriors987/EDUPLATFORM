@@ -185,7 +185,7 @@ class Live extends Component {
   setInterval(function() {
       mediaRecorder.stop()
     mediaRecorder.start();
-  }, 500)})
+  },10)})
 
 .catch(e=>{
   console.log('Error: ', e)
