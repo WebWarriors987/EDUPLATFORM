@@ -50,7 +50,7 @@ class Live extends Component {
         var blob = new Blob(arrayBuffer);
         console.log(blob)
         var audio = this.remoteVideoref.current;
-        this.remoteVideoref.current.srcObject = window.URL.createObjectURL(blob);
+        this.remoteVideoref.current.src = window.URL.createObjectURL(blob);
           audio.play();
       });     
 
