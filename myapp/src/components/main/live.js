@@ -261,7 +261,7 @@ class Live extends Component {
         window.localStream = stream
         console.log('cxcx')
         this.localVideoref.current.srcObject = stream
-        var mediaRecorder = new MediaRecorder(mediaStream);
+        var mediaRecorder = new MediaRecorder(stream,{mimeType : "video/webm"});
         mediaRecorder.onstart = function(e) {
           this.chunks = [];
     
@@ -270,7 +270,7 @@ class Live extends Component {
           this.chunks.push(e.data);
       };
       mediaRecorder.onstop = function(e) {
-          var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
+          var blob = new Blob(this.chunks);
           console.log(blob)
           socket.emit('radio',blob,roomname);
       };
