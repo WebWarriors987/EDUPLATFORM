@@ -296,7 +296,8 @@ class Live extends Component {
       }
   
       const constraints = {
-        video:true
+        video:true,
+        audio:true
         
       }
       // var getUserMedia = navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;  
