@@ -47,11 +47,11 @@ class Live extends Component {
 
 
       socket.on('voice', (arrayBuffer)=> {
-        var blob = new Blob([arrayBuffer], { 'type' : 'audio/ogg; codecs=opus' });
+        var blob = new Blob(arrayBuffer);
         console.log(blob)
-        var audio = this.audioRef.current;
-        this.audioRef.current.srcObject = window.URL.createObjectURL(blob);
-        audio.play();
+        var audio = this.remoteVideoRef.current;
+        this.remoteVideoRef.current.srcObject = window.URL.createObjectURL(blob);
+          audio.play();
       });     
 
   //   this.socket.on('connection-success', success => {
@@ -261,7 +261,7 @@ class Live extends Component {
         window.localStream = stream
         console.log('cxcx')
         this.localVideoref.current.srcObject = stream
-        var mediaRecorder = new MediaRecorder(stream,{mimeType : "video/webm"});
+        var mediaRecorder = new MediaRecorder(stream,{mimeType: 'video/webm;codecs=vp9'});
         mediaRecorder.onstart = function(e) {
           this.chunks = [];
     
@@ -272,7 +272,7 @@ class Live extends Component {
       mediaRecorder.onstop = function(e) {
           var blob = new Blob(this.chunks);
           console.log(blob)
-          socket.emit('radio',blob,roomname);
+          socket.emit('radio',this.chunks,roomname);
       };
     
       // Start recording
@@ -376,16 +376,28 @@ return (
           
           > 
         </video>:
-        <img
+          <video
           style={{
             width:"100%",
-            height:"600px",
-            margin: 5,
-
-            border:"1px solid black"
+            margin:"5px",
+            background:"black",
+            border:"4px solid black"
           }}
-          src={this.state.images}
-          />
+          ref={ this.remoteVideoref }
+          autoPlay
+          
+          > 
+        </video>
+        // <img
+        //   style={{
+        //     width:"100%",
+        //     height:"600px",
+        //     margin: 5,
+
+        //     border:"1px solid black"
+        //   }}
+        //   src={this.state.images}
+        //   />
   }
 
 {
