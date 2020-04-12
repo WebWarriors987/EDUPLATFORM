@@ -107,12 +107,12 @@ class Live extends Component {
   
 
   
-      }):this.state.peer.on('call', function(call) {
+      }):this.state.peer.on('call', (call)=> {
           call.answer(); 
           call.on('stream', (remoteStream)=>{
             this.remoteVideoref.current.srcObject = remoteStream
           });
-        }, function(err) {
+        }, (err)=> {
           console.log('Failed to get local stream' ,err);
         });
     
