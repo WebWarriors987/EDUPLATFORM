@@ -42,7 +42,8 @@ class Live extends Component {
       this.context.height = this.canvasref.current.height;
     }
     
-    this.state.peer.on('open', (id,roomname)=> {
+    this.state.peer.on('open', (id)=> {
+      console.log(id)
         socket.emit('idpeer',id,roomname)
       })
 
