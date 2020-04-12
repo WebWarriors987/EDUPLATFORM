@@ -43,7 +43,7 @@ class Live extends Component {
     }
     
     this.state.peer.on('open', (id,roomname)=> {
-        socket.emit('idpeer',id)
+        socket.emit('idpeer',id,roomname)
       })
 
 
