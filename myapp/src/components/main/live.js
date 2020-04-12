@@ -428,18 +428,23 @@ return (
           
           > 
         </video>:
+null
+  }
+       {
+      this.props.user.userData.isAdmin?
         <video
-        style={{
-          width:"100%",
-          margin:"5px",
-          background:"black",
-          border:"4px solid black"
-        }}
-        ref={ this.remoteVideoref }
-        autoPlay
-        
-        > 
-      </video>
+          style={{
+            width:"100%",
+            margin:"5px",
+            background:"black",
+            border:"4px solid black"
+          }}
+          ref={ this.remoteVideoref }
+          autoPlay
+          
+          > 
+        </video>:
+null
   }
 
 {
