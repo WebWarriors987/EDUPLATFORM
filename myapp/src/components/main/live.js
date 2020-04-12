@@ -35,10 +35,12 @@ class Live extends Component {
   componentDidMount = () => {
     const socket=this.state.socket
     const roomname=this.props.roomname
-    if(this.props.user.userData.isAdmin){
+    if(!this.props.user.userData.isAdmin){
     const remote=this.remoteVideoref.current.srcObject
+    console.log(this.remoteVideoref.current.srcObject)
     }else{
       const remote=this.localVideoref.current.srcObject
+      console.log(this.localVideoref.current.srcObject)
     }
     if(this.props.user.userData.isAdmin){
       this.context = this.canvasref.current.getContext('2d');
@@ -112,6 +114,8 @@ class Live extends Component {
 
   
       }):this.state.peer.on('call', (call)=> {
+        const remote=this.remoteVideoref.current.srcObject
+
           call.answer(); 
           call.on('stream', (stream)=>{
             console.log(stream)
