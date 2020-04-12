@@ -109,16 +109,17 @@ class Live extends Component {
   
       }):this.state.peer.on('call', (call)=> {
           call.answer(); 
-          call.on('stream', (remoteStream)=>{
+          call.on('stream', (stream)=>{
             console.log(remoteStream)
             window.localStream = stream
-            this.remoteVideoref.current.srcObject = remoteStream
+            console.log(this.remoteVideoref.current.srcObject)
+            this.remoteVideoref.current.srcObject = stream
           });
         }, (err)=> {
           console.log('Failed to get local stream' ,err);
         });
     
-  
+        console.log(this.remoteVideoref.current.srcObject)
 
   //   this.socket.on('connection-success', success => {
   //     console.log(success)
