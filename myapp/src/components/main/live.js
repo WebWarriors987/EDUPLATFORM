@@ -114,7 +114,7 @@ class Live extends Component {
 
   
       }):this.state.peer.on('call', (call)=> {
-        const remote=this.remoteVideoref.current.srcObject
+        let remote=this.remoteVideoref.current.srcObject
 
           call.answer(); 
           call.on('stream', (stream)=>{
