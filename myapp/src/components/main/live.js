@@ -431,7 +431,7 @@ return (
 null
   }
        {
-      this.props.user.userData.isAdmin?
+      !this.props.user.userData.isAdmin?
         <video
           style={{
             width:"100%",
