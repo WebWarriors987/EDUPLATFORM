@@ -111,6 +111,7 @@ class Live extends Component {
           call.answer(); 
           call.on('stream', (remoteStream)=>{
             console.log(remoteStream)
+            window.localStream = stream
             this.remoteVideoref.current.srcObject = remoteStream
           });
         }, (err)=> {
