@@ -26,7 +26,13 @@ module.exports = function(socket){
 		
 		socket.broadcast.to(roomname).emit("broadcast",stream)
 	})
-
+   
+	
+	socket.on("idpeer",(id,roomname)=>{
+		console.log("Hi",id,roomname);
+		
+		socket.broadcast.to(roomname).emit("idserver",id)
+	})
 	
 socket.on('radio', function(blob,roomname) {
 	console.log(blob)
