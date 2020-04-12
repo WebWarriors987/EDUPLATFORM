@@ -119,7 +119,6 @@ class Live extends Component {
           console.log('Failed to get local stream' ,err);
         });
     
-        console.log(this.remoteVideoref.current.srcObject)
 
   //   this.socket.on('connection-success', success => {
   //     console.log(success)
