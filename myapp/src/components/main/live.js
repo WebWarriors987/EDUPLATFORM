@@ -42,7 +42,7 @@ class Live extends Component {
       this.context.height = this.canvasref.current.height;
     }
     
-    peer.on('open', (id,roomname)=> {
+    this.state.peer.on('open', (id,roomname)=> {
         socket.emit('idpeer',id)
       })
 
@@ -69,7 +69,7 @@ class Live extends Component {
   const success = (stream) => {
       const socket=this.state.socket
       const roomname=this.props.roomname
-      var call = peer.call(id, stream);
+      var call = this.state.peer.call(id, stream);
 
       // this.socket.emit("videostream",{stream,roomname})
       window.localStream = stream
@@ -106,10 +106,10 @@ class Live extends Component {
   
 
   
-      }):peer.on('call', function(call) {
+      }):this.state.peer.on('call', function(call) {
           call.answer(); 
           call.on('stream', function(remoteStream) {
-            this.remoteVideoref.current.srcObject = remotestream
+            this.remoteVideoref.current.srcObject = remoteStream
 
           });
         }, function(err) {
