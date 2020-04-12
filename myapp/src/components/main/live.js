@@ -71,10 +71,10 @@ class Live extends Component {
       const socket=this.state.socket
       const roomname=this.props.roomname
       var call = this.state.peer.call(id, stream);
-
+       
       // this.socket.emit("videostream",{stream,roomname})
       window.localStream = stream
-      console.log('cxcx')
+      console.log(stream)
       this.localVideoref.current.srcObject = stream
       //  let u=this.localVideoref
       //  let c=this.context
