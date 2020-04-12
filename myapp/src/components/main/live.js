@@ -35,7 +35,11 @@ class Live extends Component {
   componentDidMount = () => {
     const socket=this.state.socket
     const roomname=this.props.roomname
+    if(this.props.user.userData.isAdmin){
     const remote=this.remoteVideoref.current.srcObject
+    }else{
+      const remote=this.localVideoref.current.srcObject
+    }
     if(this.props.user.userData.isAdmin){
       this.context = this.canvasref.current.getContext('2d');
       this.context.width = this.canvasref.current.width;
