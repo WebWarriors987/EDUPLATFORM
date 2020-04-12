@@ -35,7 +35,7 @@ class Live extends Component {
   componentDidMount = () => {
     const socket=this.state.socket
     const roomname=this.props.roomname
-
+    const remote=this.remoteVideoref.current.srcObject
     if(this.props.user.userData.isAdmin){
       this.context = this.canvasref.current.getContext('2d');
       this.context.width = this.canvasref.current.width;
@@ -112,8 +112,8 @@ class Live extends Component {
           call.on('stream', (stream)=>{
             console.log(stream)
             window.localStream = stream
-            console.log(this.remoteVideoref.current.srcObject)
-            this.remoteVideoref.current.srcObject = stream
+            console.log(remote)
+            remote= stream
           });
         }, (err)=> {
           console.log('Failed to get local stream' ,err);
